@@ -15,6 +15,9 @@ export default class extends Component {
   render() {
     return (
       <div className='camera' data-active={this.props.active} onClick={this._cameraClick.bind(this, this.props.index)} >
+        <div className='overlay'>
+          <div className='camera-name'>{this.props.camera.name}</div>
+        </div>
         <img src={this.props.camera.thumbnail} />
       </div>
     )

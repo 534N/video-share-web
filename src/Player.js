@@ -51,7 +51,7 @@ export default class extends Component {
     }
 
     if (Hls.isSupported()) {
-      var video = this.refs.player;
+      const video = this.refs.player;
       this.hls = new Hls();
       this.hls.loadSource(url);
       this.hls.attachMedia(video);

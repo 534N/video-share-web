@@ -7,6 +7,7 @@ import CloudAPI from '../utils/api.js'
 import Player from './Player.js';
 import Camera from './Camera.js';
 import moment from 'moment';
+import Cookie from 'js-cookie';
 
 
 export default class extends Component {
@@ -27,19 +28,15 @@ export default class extends Component {
 
   componentDidMount() {
     CloudAPI.parseToken().then(res => {
-      res.fakeCameras = [
-        {
-          id: 'test1',
-          name: "Cash 3",
-          thumbnail: "https://i.ytimg.com/vi/TfO1WTIXYLs/hqdefault.jpg?custom=true&w=336&h=188&stc=true&jpg444=true&jpgq=90&sp=67&sigh=6RQWTWeMJBKiTQpH1sAEXL44YSY",
-          streams: [{
-            "id": "fcd4d123-c544-4b76-f953-6b2bd397a286",
-            "name": "HD"
-          }, {"id": "23174f8b-5d9c-4d32-bc9e-c39f5e813123", "name": "SD"}],
-          snapshot_params: "time=1493311801000&precision=1&width=320",
-          accessibleAddress: "https://83bfe160-13dd-11e7-8984-d57f2d83a0db.solink.direct:18080",
-          deviceId: "83bfe160-13dd-11e7-8984-d57f2d83a0db"
-        },
+
+      if (res.cookies) {
+        res.cookies.forEach(cookie => {
+          Cookie.set(cookie.name, cookie.value, {domain: '.solinkcloud.com'});
+        });
+      }
+
+      res.event.fakeCameras = [
+        res.event.cameras[0],
         {
           id: 'test2',
           name: "Cash 2",
@@ -78,8 +75,10 @@ export default class extends Component {
         }
       ];
 
+      console.debug('event >>', res.event)
+
       this.setState({
-        event: res,
+        event: res.event,
       });
     });
   }
@@ -97,7 +96,6 @@ export default class extends Component {
             <div className='left'>
               <div className='title'>{this.state.event.title}</div>
               <div className='sub-title'>{this.state.event.subtitle}</div>
-              <div className='description'>{this.state.event.details.description}</div>
             </div>
             <div className='right'>
               <div className='event-start'>START: {moment(this.state.event.startTime).format('L')} {moment(this.state.event.startTime).format('LTS')}</div>
@@ -123,6 +121,9 @@ export default class extends Component {
                 }
               </div>
             }
+          </div>
+          <div className='App-details'>
+            <div className='description'>{this.state.event.details.description}</div>
           </div>
         </div>
       </div>

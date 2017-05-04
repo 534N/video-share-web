@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "forked.hls.js": "^0.6.12",
+    "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
     "react-scripts": "0.9.5"
@@ -15,7 +16,7 @@
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
-    "start": "react-scripts start",
+    "start": "PORT=80 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
