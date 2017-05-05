@@ -17,15 +17,15 @@ export default class extends Component {
 
     this.state = {
       event: {
-        title: '  .',
+        title: '.',
         subtitle: '.',
         startTime: '',
         endTime: '',
         details: {
-          description: '',
+          description: '.',
         },
-        details: {},
         fakeCameras: [],
+        shares: [],
         cameras: [
           {
             id: 'test2',
@@ -127,22 +127,27 @@ export default class extends Component {
       }
     );
 
-    const start = this.state.dataReady ? `START: ${moment(this.state.event.startTime).format('L')} ${moment(this.state.event.startTime).format('LTS')}` : '';
-    const end = this.state.dataReady ? `END: ${moment(this.state.event.endStart).format('L')} ${moment(this.state.event.endTime).format('LTS')}` : '';
+    const start = `${moment(this.state.event.startTime).format('L')} ${moment(this.state.event.startTime).format('LTS')}`;
+    const end = `${moment(this.state.event.endStart).format('L')} ${moment(this.state.event.endTime).format('LTS')}`;
 
     return (
       <div className={appClass}>
         <div className='container'>
           <div className='App-header'>
-            <div className='left'>
-              <div className='title'>{this.state.event.title}</div>
-              <div className='sub-title'>{this.state.event.subtitle}</div>
-            </div>
-            <div className='right'>
-
-              <div className='event-start'>{start}</div>
-              <div className='event-end'>{end}</div>
-            </div>
+            <img src={process.env.PUBLIC_URL + '/solink.png'} />
+            {
+              this.state.dataReady &&
+              <div className='right'>
+                Video time: {start} - {end}
+              </div>
+            }
+            {
+              !this.state.dataReady &&
+              <div className='right'>
+                <div className='right-fake'/>
+              </div>
+            }
+            
           </div>
           <div className='app-body'>
             {
@@ -176,12 +181,36 @@ export default class extends Component {
             }
           </div>
           <div className='App-details'>
-            <div className='description'>{this.state.event.details.description}</div>
+            <div className='left'>
+              <div className='title'>{this.state.event.title}</div>
+              <div className='sub-title'>{this.state.event.subtitle}</div>
+
+            </div>
+            <div className='description'>
+              {this.state.event.details.description}
+            </div>
+            {
+              this.state.dataReady &&
+              this._renderShareInfo()
+            }
+            
           </div>
         </div>
       </div>
     );
   }
+
+  _renderShareInfo() {
+    const shareInfo = this.state.event.shares.filter(share => {
+      return share.email === this.state.event.viewer;
+    });
+
+
+    return (
+      <div className='share-info'>Shared by <span className='email'>{shareInfo[0].sharedBy}</span> at {shareInfo[0].sharedAt}</div>
+    )
+  }
+
 
   _handleCameraChange(index) {
     this.setState({
