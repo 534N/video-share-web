@@ -152,7 +152,7 @@ export default class extends Component {
           <div className='app-body'>
             {
               url.length > 0 && this.state.dataReady &&
-              <Player url={url} width={800} height={450} />
+              <Player url={url}  />
             }
             {
               !this.state.dataReady &&

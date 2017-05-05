@@ -28,8 +28,8 @@ export default class extends Component {
           ref='player'
           src={this.props.url}
           autoPlay={false}
-          width={`${this.props.width}px`}
-          height={`${this.props.height}px`}
+          // width={`${this.props.width}px`}
+          // height={`${this.props.height}px`}
           controls={true} />
       </div>
     )

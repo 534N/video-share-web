@@ -1,4 +1,5 @@
 @import './mixins/_transitions'
+@import './mixins/_devices'
 
 @keyframes flash
   0%
@@ -49,12 +50,14 @@
           font-size: 1em
         .sub-title
           width: 200px
+          height: 20px
           background: #eee
           border-radius: 100px
           color: #eee
           font-size: 1em
         .description
           width: 500px
+          height: 15px
           background: #eee
           border-radius: 100px
           color: #eee
@@ -129,3 +132,112 @@
         padding: 5px 0
         .email
           color: #0088cc
+
+
+@media #{$nexus-6p-portrait}
+  .App
+    &.fake
+      .container
+        .app-body
+          .player-fake
+            width: 100%
+            height: calc(100vw * 9/16)
+            background: #eee
+        .App-intro
+          .cameras-panel
+            justify-content: flex-start
+            padding: 10px
+            box-sizing: border-box
+        .App-details
+          padding: 1em
+          .title
+            margin-bottom: 10px
+          .description
+            width: 320px
+    .container
+      width: 100%
+    .App-header
+      flex-direction: column
+      padding: 1em
+      align-items: flex-start
+      box-sizing: border-box
+      img
+        margin: 0 0 1em 0 !important
+      .right
+        padding-bottom: 0 !important
+    .app-body
+      .video-wrap
+        .player
+          width: 100%
+          height: auto
+    .App-intro
+      margin: 0 1em
+      .cameras-panel
+        height: auto !important
+        flex-wrap: wrap
+        .camera
+          min-width: 165px
+          &[data-active=true]
+            transform: scale(1)
+            margin: 0
+    .App-details
+      margin: 1em
+      .left
+        flex-direction: column
+        align-items: flex-start !important
+        .sub-title
+          margin: 0
+
+@media #{$iphone-6-and-plus-portrait}
+  .App
+    &.fake
+      .container
+        .app-body
+          .player-fake
+            width: 100%
+            height: calc(100vw * 9/16)
+            background: #eee
+        .App-intro
+          .cameras-panel
+            justify-content: flex-start
+            padding: 10px
+            box-sizing: border-box
+        .App-details
+          padding: 1em
+          .title
+            margin-bottom: 10px
+          .description
+            width: 320px
+    .container
+      width: 100%
+    .App-header
+      flex-direction: column
+      padding: 1em
+      align-items: flex-start
+      box-sizing: border-box
+      img
+        margin: 0 0 1em 0 !important
+      .right
+        padding-bottom: 0 !important
+    .app-body
+      .video-wrap
+        .player
+          width: 100%
+          height: auto
+    .App-intro
+      margin: 0 1em
+      .cameras-panel
+        height: auto !important
+        flex-wrap: wrap
+        .camera
+          min-width: 165px
+          &[data-active=true]
+            transform: scale(1)
+            margin: 0
+    .App-details
+      margin: 1em
+      .left
+        flex-direction: column
+        align-items: flex-start !important
+        .sub-title
+          margin: 0

@@ -10,7 +10,7 @@ module.exports = {
 
       camera.streams.forEach(stream => {
         if (stream.playlist) {
-          url = stream.playlist;
+          return url = stream.playlist;
         }
       });
 
