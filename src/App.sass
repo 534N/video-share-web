@@ -1,8 +1,55 @@
+@import './mixins/_transitions'
+
+@keyframes flash
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
 .App
   text-align: center
   display: flex
   align-items: center
   flex-direction: column
+  &.data-ready
+    animation: flash 1.5s 1 0s;
+  &.fake
+    .container
+      .App-header
+        .right
+          .event-start
+            padding: 5px
+          .event-end
+            padding: 5px 5px 0 5px
+        .title
+          width: 150px
+          background: #ddd
+          border-radius: 100px
+          color: #eee
+          font-size: 1em
+          margin-bottom: 5px
+        .sub-title
+          width: 200px
+          background: #eee
+          border-radius: 100px
+          color: #eee
+          font-size: 1em
+      .app-body
+        .player-fake
+          width: 800px
+          height: 450px
+          background: #eee
+      .App-intro
+        .cameras-panel
+          justify-content: flex-start
+          height: 140px
+          .camera
+            width: 147px
+            height: 84px
+            background: #ddd
+            margin-left: 20px
+            .overlay
+              opacity: 0
   .container
     width: 800px
     .App-header
