@@ -26,20 +26,7 @@ export default class extends Component {
         },
         fakeCameras: [],
         shares: [],
-        cameras: [
-          {
-            id: 'test2',
-            name: 'Cash 2',
-            thumbnail: 'https://i.ytimg.com/vi/txU-z4meCS4/hqdefault.jpg?custom=true&w=336&h=188&stc=true&jpg444=true&jpgq=90&sp=67&sigh=Wac06ms6Yk_PZjmAXWmc_ypL-_Q',
-            streams: [{
-              'id': 'fcd4d123-c544-4b76-f953-6b2bd397a286',
-              'name': 'HD'
-            }, {'id': '23174f8b-5d9c-4d32-bc9e-c39f5e813123', 'name': 'SD'}],
-            snapshot_params: 'time=1493311801000&precision=1&width=320',
-            accessibleAddress: 'https://83bfe160-13dd-11e7-8984-d57f2d83a0db.solink.direct:18080',
-            deviceId: '83bfe160-13dd-11e7-8984-d57f2d83a0db'
-          }
-        ],
+        cameras: [],
       },
       playingIndex: 0,
       dataReady: false,
@@ -57,52 +44,12 @@ export default class extends Component {
         });
       }
 
-      // 
-      // 
-      // fake info
-      res.event.fakeCameras = [
-        res.event.cameras[0],
-        {
-          id: 'test2',
-          name: 'Cash 2',
-          thumbnail: 'https://i.ytimg.com/vi/txU-z4meCS4/hqdefault.jpg?custom=true&w=336&h=188&stc=true&jpg444=true&jpgq=90&sp=67&sigh=Wac06ms6Yk_PZjmAXWmc_ypL-_Q',
-          streams: [{
-            'id': 'fcd4d123-c544-4b76-f953-6b2bd397a286',
-            'name': 'HD'
-          }, {'id': '23174f8b-5d9c-4d32-bc9e-c39f5e813123', 'name': 'SD'}],
-          snapshot_params: 'time=1493311801000&precision=1&width=320',
-          accessibleAddress: 'https://83bfe160-13dd-11e7-8984-d57f2d83a0db.solink.direct:18080',
-          deviceId: '83bfe160-13dd-11e7-8984-d57f2d83a0db'
-        },
-        {
-          id: 'test3',
-          name: 'Cash 2',
-          thumbnail: 'https://i.ytimg.com/vi/txU-z4meCS4/hqdefault.jpg?custom=true&w=336&h=188&stc=true&jpg444=true&jpgq=90&sp=67&sigh=Wac06ms6Yk_PZjmAXWmc_ypL-_Q',
-          streams: [{
-            'id': 'fcd4d123-c544-4b76-f953-6b2bd397a286',
-            'name': 'HD'
-          }, {'id': '23174f8b-5d9c-4d32-bc9e-c39f5e813123', 'name': 'SD'}],
-          snapshot_params: 'time=1493311801000&precision=1&width=320',
-          accessibleAddress: 'https://83bfe160-13dd-11e7-8984-d57f2d83a0db.solink.direct:18080',
-          deviceId: '83bfe160-13dd-11e7-8984-d57f2d83a0db'
-        },
-        {
-          id: 'test4',
-          name: 'Cash 2',
-          thumbnail: 'https://i.ytimg.com/vi/txU-z4meCS4/hqdefault.jpg?custom=true&w=336&h=188&stc=true&jpg444=true&jpgq=90&sp=67&sigh=Wac06ms6Yk_PZjmAXWmc_ypL-_Q',
-          streams: [{
-            'id': 'fcd4d123-c544-4b76-f953-6b2bd397a286',
-            'name': 'HD'
-          }, {'id': '23174f8b-5d9c-4d32-bc9e-c39f5e813123', 'name': 'SD'}],
-          snapshot_params: 'time=1493311801000&precision=1&width=320',
-          accessibleAddress: 'https://83bfe160-13dd-11e7-8984-d57f2d83a0db.solink.direct:18080',
-          deviceId: '83bfe160-13dd-11e7-8984-d57f2d83a0db'
-        }
-      ];
-
       console.debug('event >>', res.event)
 
+      const url = CloudAPI.getPlaylist(res.event.cameras[this.state.playingIndex]);
+
       this.setState({
+        playingUrl: url,
         info: res.info,
         event: res.event,
         dataReady: true,
@@ -111,12 +58,7 @@ export default class extends Component {
   }
 
   render() {
-
-    let url = '';
-    if (this.state.event.fakeCameras.length > 0) {
-      url = CloudAPI.getPlaylist(this.state.event.fakeCameras[this.state.playingIndex]);
-    }
-
+    
 
     const appClass = classNames(
       'App',
@@ -125,8 +67,6 @@ export default class extends Component {
         'data-ready': this.state.dataReady,
       }
     );
-    console.debug(appClass)
-
 
     const start = `${moment(this.state.event.startTime).format('L')} ${moment(this.state.event.startTime).format('LTS')}`;
     const end = `${moment(this.state.event.endStart).format('L')} ${moment(this.state.event.endTime).format('LTS')}`;
@@ -152,8 +92,8 @@ export default class extends Component {
           </div>
           <div className='app-body'>
             {
-              url.length > 0 && this.state.dataReady &&
-              <Player url={url}  />
+              this.state.dataReady &&
+              <Player url={this.state.playingUrl}  />
             }
             {
               !this.state.dataReady &&
@@ -162,10 +102,11 @@ export default class extends Component {
           </div>
           <div className='App-intro'>
             {
-              this.state.event.fakeCameras.length > 0 && this.state.dataReady &&
+              this.state.event.cameras.length > 0 && this.state.dataReady &&
               <div className='cameras-panel'>
                 {
-                  this.state.event.fakeCameras.map((camera, idx) => {
+                  this.state.event.cameras.map((camera, idx) => {
+                    console.debug('camera', camera)
                     return (
                       <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
                     )
@@ -208,14 +149,17 @@ export default class extends Component {
     });
 
     return (
-      <div className='share-info'>Shared by <span className='email'>{shareInfo[0].sharedBy}</span> at {shareInfo[0].sharedAt}</div>
+      <div className='share-info'>Shared by <span className='email'>{shareInfo[0].sharedBy}</span> at {moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
     )
   }
 
 
   _handleCameraChange(index) {
+    const url = CloudAPI.getPlaylist(this.state.event.cameras[index]);
+
     this.setState({
       playingIndex: index,
+      playingUrl: url,
     });
   }
 }

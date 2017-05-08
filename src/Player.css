@@ -1,5 +1,6 @@
 .video-wrap {
-  background: #fafafa; }
+  background: #fafafa;
+  max-height: 450px; }
   .video-wrap .player {
     background: #000;
     width: 800px;

@@ -27,9 +27,7 @@ export default class extends Component {
           className='player'
           ref='player'
           src={this.props.url}
-          autoPlay={false}
-          // width={`${this.props.width}px`}
-          // height={`${this.props.height}px`}
+          autoPlay={true}
           controls={true} />
       </div>
     )
@@ -38,10 +36,10 @@ export default class extends Component {
 
   _initHLS(url) {
     const config = {
-      autoStartLoad: false,
-      debug: true,
-      enableWorker: true,
-      fragLoadingTimeOut: 60000,
+      xhrSetup: (xhr, url) => {
+        xhr.withCredentials = true;
+      },
+      debug: false,
     };
 
     const vid = this.refs.player;
@@ -52,16 +50,13 @@ export default class extends Component {
 
     if (Hls.isSupported()) {
       const video = this.refs.player;
-      this.hls = new Hls();
+      this.hls = new Hls(config);
       this.hls.loadSource(url);
       this.hls.attachMedia(video);
       this.hls.on(Hls.Events.MANIFEST_PARSED,function() {
-        // video.play();
+        video.play();
       });
     } 
-
-    // this.hls = new Hls(config);
-    // this.hls.attachMedia(vid);
 
   }
 
