@@ -4,4 +4,3 @@ build
 .module-cache
 *.log*
 _nogit
-src/**/*.css

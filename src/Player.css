@@ -1,0 +1,6 @@
+.video-wrap {
+  background: #fafafa; }
+  .video-wrap .player {
+    background: #000;
+    width: 800px;
+    height: 450px; }

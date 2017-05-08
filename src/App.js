@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import CloudAPI from '../utils/api.js'
+import CloudAPI from './utils/api.js'
 import Player from './Player.js';
 import Camera from './Camera.js';
 import moment from 'moment';
@@ -109,6 +109,10 @@ export default class extends Component {
         event: res.event,
         dataReady: true,
       });
+    }).catch(err => {
+
+      /* handle error */
+      
     });
   }
 

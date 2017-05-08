@@ -1,0 +1,16 @@
+.camera {
+  padding: 11px;
+  box-sizing: border-box;
+  opacity: 0.8;
+  cursor: pointer; }
+
+.camera[data-active=true] {
+  opacity: 1;
+  transform: scale(1); }
+
+.camera:hover {
+  opacity: 1; }
+
+.camera img {
+  width: 180px;
+  height: auto; }
