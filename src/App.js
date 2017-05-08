@@ -60,9 +60,6 @@ export default class extends Component {
       // 
       // 
       // fake info
-      const viewer = 'syang@solinkcorp.com';
-
-      res.event.viewer = viewer;
       res.event.fakeCameras = [
         res.event.cameras[0],
         {
@@ -106,17 +103,15 @@ export default class extends Component {
       console.debug('event >>', res.event)
 
       this.setState({
+        info: res.info,
         event: res.event,
         dataReady: true,
       });
-    }).catch(err => {
-
-      /* handle error */
-      
-    });
+    })
   }
 
   render() {
+
     let url = '';
     if (this.state.event.fakeCameras.length > 0) {
       url = CloudAPI.getPlaylist(this.state.event.fakeCameras[this.state.playingIndex]);
@@ -130,6 +125,8 @@ export default class extends Component {
         'data-ready': this.state.dataReady,
       }
     );
+    console.debug(appClass)
+
 
     const start = `${moment(this.state.event.startTime).format('L')} ${moment(this.state.event.startTime).format('LTS')}`;
     const end = `${moment(this.state.event.endStart).format('L')} ${moment(this.state.event.endTime).format('LTS')}`;
@@ -205,10 +202,10 @@ export default class extends Component {
   }
 
   _renderShareInfo() {
-    const shareInfo = this.state.event.shares.filter(share => {
-      return share.email === this.state.event.viewer;
-    });
 
+    const shareInfo = this.state.event.shares.filter(share => {
+      return share.email === this.state.info.sharedTo;
+    });
 
     return (
       <div className='share-info'>Shared by <span className='email'>{shareInfo[0].sharedBy}</span> at {shareInfo[0].sharedAt}</div>
