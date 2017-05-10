@@ -13,16 +13,13 @@
 .App.data-ready {
   animation: flash 1.5s 1 0s; }
 
-.App.fake .container .App-header .right .right-fake {
-  width: 200px;
-  background: #eee;
-  height: 16px;
-  border-radius: 100px; }
-
 .App.fake .container .app-body .player-fake {
   width: 800px;
   height: 450px;
-  background: #ddd; }
+  background: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 
 .App.fake .container .App-intro .cameras-panel {
   justify-content: flex-start;
@@ -63,6 +60,12 @@
   color: #eee;
   font-size: 1em; }
 
+.App.fake .container .App-details .right .right-fake {
+  width: 200px;
+  background: #eee;
+  height: 10px;
+  border-radius: 100px; }
+
 .App .container {
   width: 800px; }
 
@@ -75,15 +78,6 @@
   width: 200px;
   height: 30px;
   margin: 1em 0; }
-
-.App .container .App-header .right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding-bottom: 1em;
-  font-size: 13px;
-  color: #555;
-  font-weight: 100; }
 
 .App .container .app-body {
   box-sizing: border-box;
@@ -117,7 +111,9 @@
 .App .container .App-details .left {
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start; }
+  justify-content: flex-start;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #ddd; }
 
 .App .container .App-details .title {
   color: #555;
@@ -134,6 +130,15 @@
   color: #555;
   text-align: left;
   margin-top: 10px; }
+
+.App .container .App-details .right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 5px;
+  font-size: 13px;
+  color: #555;
+  font-weight: 100; }
 
 .App .container .App-share-info {
   padding: 1em;
@@ -168,11 +173,14 @@
   .App.fake .container .app-body .player-fake {
     width: 100%;
     height: calc(100vw * 9/16);
-    background: #eee; }
+    background: #000; }
   .App.fake .container .App-intro .cameras-panel {
-    justify-content: flex-start;
+    justify-content: space-around;
     padding: 10px;
     box-sizing: border-box; }
+  .App.fake .container .App-intro .cameras-panel .camera {
+    background: #444;
+    margin: 0; }
   .App.fake .container .App-details {
     padding: 1em; }
   .App.fake .container .App-details .title {
@@ -183,21 +191,30 @@
     width: 100%; }
   .App .App-header {
     flex-direction: column;
-    padding: 1em;
+    padding: 10px;
     align-items: flex-start;
     box-sizing: border-box; }
   .App .App-header img {
-    margin: 0 0 1em 0 !important; }
+    margin: 0 !important;
+    width: 130px !important;
+    height: 20px !important; }
   .App .App-header .right {
     padding-bottom: 0 !important; }
+  .App .app-body {
+    box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6); }
+  .App .app-body .video-wrap {
+    max-height: 232px; }
   .App .app-body .video-wrap .player {
     width: 100%;
-    height: auto; }
+    max-height: 232px; }
   .App .App-intro {
-    margin: 0 1em; }
+    margin: 0 !important;
+    background: #333 !important;
+    box-shadow: none !important; }
   .App .App-intro .cameras-panel {
     height: auto !important;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
   .App .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .App-intro .cameras-panel .camera[data-active=true] {
@@ -213,15 +230,18 @@
   .App .App-share-info {
     margin: 1em; } }
 
-@media only screen and (max-device-width: 375), only screen and (max-device-width: 414px), only screen and (max-width: 480px) {
+@media only screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
   .App.fake .container .app-body .player-fake {
     width: 100%;
     height: calc(100vw * 9/16);
-    background: #eee; }
+    background: #000; }
   .App.fake .container .App-intro .cameras-panel {
-    justify-content: flex-start;
+    justify-content: space-around;
     padding: 10px;
     box-sizing: border-box; }
+  .App.fake .container .App-intro .cameras-panel .camera {
+    background: #444;
+    margin: 0; }
   .App.fake .container .App-details {
     padding: 1em; }
   .App.fake .container .App-details .title {
@@ -232,21 +252,91 @@
     width: 100%; }
   .App .App-header {
     flex-direction: column;
-    padding: 1em;
+    padding: 10px;
     align-items: flex-start;
     box-sizing: border-box; }
   .App .App-header img {
-    margin: 0 0 1em 0 !important; }
+    margin: 0 !important;
+    width: 130px !important;
+    height: 20px !important; }
   .App .App-header .right {
     padding-bottom: 0 !important; }
+  .App .app-body {
+    box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6); }
+  .App .app-body .video-wrap {
+    max-height: 211px; }
   .App .app-body .video-wrap .player {
     width: 100%;
-    height: auto; }
+    max-height: 211px; }
   .App .App-intro {
-    margin: 0 1em; }
+    margin: 0 !important;
+    background: #333 !important;
+    box-shadow: none !important; }
   .App .App-intro .cameras-panel {
     height: auto !important;
-    flex-wrap: wrap; }
+    flex-wrap: wrap;
+    box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
+  .App .App-intro .cameras-panel .camera {
+    min-width: 165px; }
+  .App .App-intro .cameras-panel .camera[data-active=true] {
+    transform: scale(1);
+    margin: 0; }
+  .App .App-details {
+    margin: 1em; }
+  .App .App-details .left {
+    flex-direction: column;
+    align-items: flex-start !important; }
+  .App .App-details .left .sub-title {
+    margin: 0; }
+  .App .App-share-info {
+    margin: 1em; } }
+
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 3) {
+  .App.fake .container .app-body .player-fake {
+    width: 100%;
+    height: calc(100vw * 9/16);
+    background: #000; }
+  .App.fake .container .App-intro .cameras-panel {
+    justify-content: space-around;
+    padding: 10px;
+    box-sizing: border-box; }
+  .App.fake .container .App-intro .cameras-panel .camera {
+    background: #444;
+    margin: 0; }
+  .App.fake .container .App-details {
+    padding: 1em; }
+  .App.fake .container .App-details .title {
+    margin-bottom: 10px; }
+  .App.fake .container .App-details .description {
+    width: 320px; }
+  .App .container {
+    width: 100%; }
+  .App .App-header {
+    flex-direction: column;
+    padding: 10px;
+    align-items: flex-start;
+    box-sizing: border-box; }
+  .App .App-header img {
+    margin: 0 !important;
+    width: 130px !important;
+    height: 20px !important; }
+  .App .App-header .right {
+    padding-bottom: 0 !important; }
+  .App .app-body {
+    box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6); }
+  .App .app-body .video-wrap {
+    max-height: 232px; }
+  .App .app-body .video-wrap .player {
+    width: 100%;
+    max-height: 232px; }
+  .App .App-intro {
+    margin: 0 !important;
+    background: #333 !important;
+    box-shadow: none !important; }
+  .App .App-intro .cameras-panel {
+    height: auto !important;
+    flex-wrap: wrap;
+    box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
   .App .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .App-intro .cameras-panel .camera[data-active=true] {

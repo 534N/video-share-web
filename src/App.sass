@@ -17,18 +17,16 @@
   &.fake
     .container
       .App-header
-        .right
-          .right-fake
-            width: 200px
-            background: #eee
-            height: 16px
-            border-radius: 100px
+        
         
       .app-body
         .player-fake
           width: 800px
           height: 450px
-          background: #ddd
+          background: #333
+          display: flex
+          justify-content: center
+          align-items: center
       .App-intro
         .cameras-panel
           justify-content: flex-start
@@ -62,6 +60,12 @@
           border-radius: 100px
           color: #eee
           font-size: 1em
+        .right
+          .right-fake
+            width: 200px
+            background: #eee
+            height: 10px
+            border-radius: 100px
   .container
     width: 800px
     .App-header
@@ -73,14 +77,7 @@
         width: 200px
         height: 30px
         margin: 1em 0
-      .right
-        display: flex
-        justify-content: flex-end
-        align-items: flex-end
-        padding-bottom: 1em
-        font-size: 13px
-        color: #555
-        font-weight: 100
+      
     .app-body
       box-sizing: border-box
       box-shadow: 0 3px 7px 0px rgba(0,0,0,0.3)
@@ -110,6 +107,8 @@
         display: flex
         align-items: flex-end
         justify-content: flex-start
+        padding-bottom: 1em
+        border-bottom: 1px solid #ddd
       .title
         color: #555
         font-size: 1.3em
@@ -123,6 +122,14 @@
         color: #555
         text-align: left
         margin-top: 10px
+      .right
+        display: flex
+        justify-content: flex-start
+        align-items: center
+        padding-top: 5px
+        font-size: 13px
+        color: #555
+        font-weight: 100
     .App-share-info
       padding: 1em
       margin-top: 1em
@@ -156,12 +163,15 @@
           .player-fake
             width: 100%
             height: calc(100vw * 9/16)
-            background: #eee
+            background: #000
         .App-intro
           .cameras-panel
-            justify-content: flex-start
+            justify-content: space-around
             padding: 10px
             box-sizing: border-box
+            .camera
+              background: #444
+              margin: 0
         .App-details
           padding: 1em
           .title
@@ -172,23 +182,30 @@
       width: 100%
     .App-header
       flex-direction: column
-      padding: 1em
+      padding: 10px
       align-items: flex-start
       box-sizing: border-box
       img
-        margin: 0 0 1em 0 !important
+        margin: 0 !important
+        width: 130px !important
+        height: 20px !important
       .right
         padding-bottom: 0 !important
     .app-body
+      box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6)
       .video-wrap
+        max-height: 232px
         .player
           width: 100%
-          height: auto
+          max-height: 232px
     .App-intro
-      margin: 0 1em
+      margin: 0 !important
+      background: #333 !important
+      box-shadow: none !important
       .cameras-panel
         height: auto !important
         flex-wrap: wrap
+        box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
         .camera
           min-width: 165px
           &[data-active=true]
@@ -204,7 +221,7 @@
     .App-share-info
       margin: 1em
 
-@media #{$iphone-6-and-plus-portrait}
+@media #{$iphone-6-portrait}
   .App
     &.fake
       .container
@@ -212,12 +229,15 @@
           .player-fake
             width: 100%
             height: calc(100vw * 9/16)
-            background: #eee
+            background: #000
         .App-intro
           .cameras-panel
-            justify-content: flex-start
+            justify-content: space-around
             padding: 10px
             box-sizing: border-box
+            .camera
+              background: #444
+              margin: 0
         .App-details
           padding: 1em
           .title
@@ -228,23 +248,96 @@
       width: 100%
     .App-header
       flex-direction: column
-      padding: 1em
+      padding: 10px
       align-items: flex-start
       box-sizing: border-box
       img
-        margin: 0 0 1em 0 !important
+        margin: 0 !important
+        width: 130px !important
+        height: 20px !important
       .right
         padding-bottom: 0 !important
     .app-body
+      box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6)
       .video-wrap
+        max-height: 211px
         .player
           width: 100%
-          height: auto
+          max-height: 211px
     .App-intro
-      margin: 0 1em
+      margin: 0 !important
+      background: #333 !important
+      box-shadow: none !important
       .cameras-panel
         height: auto !important
         flex-wrap: wrap
+        box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
+        .camera
+          min-width: 165px
+          &[data-active=true]
+            transform: scale(1)
+            margin: 0
+    .App-details
+      margin: 1em
+      .left
+        flex-direction: column
+        align-items: flex-start !important
+        .sub-title
+          margin: 0
+    .App-share-info
+      margin: 1em
+
+@media #{$iphone-6-plus-portrait}
+  .App
+    &.fake
+      .container
+        .app-body
+          .player-fake
+            width: 100%
+            height: calc(100vw * 9/16)
+            background: #000
+        .App-intro
+          .cameras-panel
+            justify-content: space-around
+            padding: 10px
+            box-sizing: border-box
+            .camera
+              background: #444
+              margin: 0
+        .App-details
+          padding: 1em
+          .title
+            margin-bottom: 10px
+          .description
+            width: 320px
+    .container
+      width: 100%
+    .App-header
+      flex-direction: column
+      padding: 10px
+      align-items: flex-start
+      box-sizing: border-box
+      img
+        margin: 0 !important
+        width: 130px !important
+        height: 20px !important
+      .right
+        padding-bottom: 0 !important
+    .app-body
+      box-shadow: 0 3px 12px 0px rgba(0, 0, 0, 0.6)
+      .video-wrap
+        max-height: 232px
+        .player
+          width: 100%
+          max-height: 232px
+    .App-intro
+      margin: 0 !important
+      background: #333 !important
+      box-shadow: none !important
+      .cameras-panel
+        height: auto !important
+        flex-wrap: wrap
+        box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
         .camera
           min-width: 165px
           &[data-active=true]

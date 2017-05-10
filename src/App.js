@@ -69,26 +69,13 @@ export default class extends Component {
     );
 
     const start = `${moment(this.state.event.startTime).format('L')} ${moment(this.state.event.startTime).format('LTS')}`;
-    const end = `${moment(this.state.event.endStart).format('L')} ${moment(this.state.event.endTime).format('LTS')}`;
+    const end = `${moment(this.state.event.endTime).format('L')} ${moment(this.state.event.endTime).format('LTS')}`;
 
     return (
       <div className={appClass}>
         <div className='container'>
           <div className='App-header'>
             <img src={process.env.PUBLIC_URL + '/solink.png'} />
-            {
-              this.state.dataReady &&
-              <div className='right'>
-                Video time: {start} - {end}
-              </div>
-            }
-            {
-              !this.state.dataReady &&
-              <div className='right'>
-                <div className='right-fake'/>
-              </div>
-            }
-            
           </div>
           <div className='app-body'>
             {
@@ -97,7 +84,9 @@ export default class extends Component {
             }
             {
               !this.state.dataReady &&
-              <div className='player-fake'/>
+              <div className='player-fake'>
+                <img src={process.env.PUBLIC_URL + '/svg/loading-spokes.svg'} />
+              </div>
             }
           </div>
           <div className='App-intro'>
@@ -126,8 +115,19 @@ export default class extends Component {
             <div className='left'>
               <div className='title'>{this.state.event.title}</div>
               <div className='sub-title'>{this.state.event.subtitle}</div>
-
             </div>
+            {
+              this.state.dataReady &&
+              <div className='right'>
+                Video time: {start} - {end}
+              </div>
+            }
+            {
+              !this.state.dataReady &&
+              <div className='right'>
+                <div className='right-fake'/>
+              </div>
+            }
             <div className='description'>
               {this.state.event.details.description}
             </div>

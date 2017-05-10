@@ -1,0 +1,22 @@
+<svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+    <g fill="none" fill-rule="evenodd">
+	    <g transform="translate(1 1)" stroke-width="2">
+    	    <circle stroke-opacity=".5" cx="18" cy="18" r="16" stroke-width="4"/>
+    	    <path d="M34,18c0-8.8-7.2-16-16-16" stroke-width="4">
+                <animateTransform
+                    type="rotate"
+                    fill="remove"
+                    attributeName="transform"
+                    accumulate="none"
+                    dur="1s"
+                    additive="replace"
+                    from="0 18 18"
+                    to="360 18 18"
+                    restart="always"
+                    calcMode="linear"
+                    repeatCount="indefinite">
+                </animateTransform>
+            </path>
+        </g>
+    </g>
+</svg>
