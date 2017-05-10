@@ -131,11 +131,12 @@ export default class extends Component {
             <div className='description'>
               {this.state.event.details.description}
             </div>
+          </div>
+          <div className='App-share-info'>
             {
               this.state.dataReady &&
               this._renderShareInfo()
             }
-            
           </div>
         </div>
       </div>
@@ -148,8 +149,19 @@ export default class extends Component {
       return share.email === this.state.info.sharedTo;
     });
 
+    const prefix = shareInfo[0].message.length > 0 ? 'Message from ' : 'Shared By ';
+
     return (
-      <div className='share-info'>Shared by <span className='email'>{shareInfo[0].sharedBy}</span> at {moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
+      <div className='share-info'>
+        <div className='share-header'>{prefix}<span className='email'>{shareInfo[0].sharedBy}</span> </div>
+        {
+          shareInfo[0].message.length > 0 &&
+          <div className='share-message'>
+            {shareInfo[0].message}
+          </div>
+        }
+        <div className='share-footer'>{moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
+      </div>
     )
   }
 

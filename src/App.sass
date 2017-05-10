@@ -28,7 +28,7 @@
         .player-fake
           width: 800px
           height: 450px
-          background: #eee
+          background: #ddd
       .App-intro
         .cameras-panel
           justify-content: flex-start
@@ -36,7 +36,7 @@
           .camera
             width: 147px
             height: 84px
-            background: #ddd
+            background: #eee
             margin-left: 20px
             .overlay
               opacity: 0
@@ -89,7 +89,6 @@
     .App-intro
       background: #fff
       font-size: large
-      /*padding: 10px 10px 0px*/
       z-index: 1
       position: relative
       margin: 0em 1.5px
@@ -101,7 +100,7 @@
         justify-content: center
         height: 140px
     .App-details
-      padding: 1em 1em 0 1em
+      padding: 1em
       margin-top: 1em
       background: #fff
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
@@ -123,13 +122,28 @@
         font-size: 16px
         color: #555
         text-align: left
-        margin: 10px 0
+        margin-top: 10px
+    .App-share-info
+      padding: 1em
+      margin-top: 1em
+      background: #fff
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1)
+      line-height: 1.5em
+      font-weight: 100
       .share-info
-        text-align: right
+        text-align: left
         color: #555
         font-size: 14px
-        border-top: 1px solid #ddd
-        padding: 5px 0
+        .share-header
+          margin-bottom: 5px
+        .share-message
+          padding: 1em
+          border: 1px solid #ddd
+          text-align: center
+          font-size: 1.2em
+          border-radius: 0 8px 0px 8px
+        .share-footer
+          text-align: right
         .email
           color: #0088cc
 
@@ -187,6 +201,8 @@
         align-items: flex-start !important
         .sub-title
           margin: 0
+    .App-share-info
+      margin: 1em
 
 @media #{$iphone-6-and-plus-portrait}
   .App
@@ -241,3 +257,5 @@
         align-items: flex-start !important
         .sub-title
           margin: 0
+    .App-share-info
+      margin: 1em
