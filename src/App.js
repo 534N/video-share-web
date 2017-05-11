@@ -149,18 +149,20 @@ export default class extends Component {
       return share.email === this.state.info.sharedTo;
     });
 
-    const prefix = shareInfo[0].message.length > 0 ? 'Message from ' : 'Shared By ';
+    let prefix = 'Shared By ';
 
     return (
       <div className='share-info'>
-        <div className='share-header'>{prefix}<span className='email'>{shareInfo[0].sharedBy}</span> </div>
+        <div className='share-header'>
+          <div>{prefix}<span className='email'>{shareInfo[0].sharedBy}</span></div>
+          <div>{moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
+        </div>
         {
-          shareInfo[0].message.length > 0 &&
+          shareInfo[0].message && shareInfo[0].message.length > 0 && false &&
           <div className='share-message'>
-            {shareInfo[0].message}
+            " {shareInfo[0].message} "
           </div>
         }
-        <div className='share-footer'>{moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
       </div>
     )
   }
