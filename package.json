@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "connect-hls.js": "^1.1.1",
+    "connect-hls.js": "^1.1.2",
     "js-cookie": "^2.1.4",
     "moment": "^2.18.1",
     "node-sass": "^4.5.2",
