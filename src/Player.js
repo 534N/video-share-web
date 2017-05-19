@@ -1,8 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import Hls from 'forked.hls.js';
-// import Hls from 'hls.js';
+import Hls from 'connect-hls.js';
 import './Player.css';
 
 export default class extends Component {

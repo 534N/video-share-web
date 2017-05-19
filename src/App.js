@@ -158,7 +158,7 @@ export default class extends Component {
           <div>{moment(new Date(shareInfo[0].sharedAt)).format('MMMM Do YYYY, h:mm:ss a')}</div>
         </div>
         {
-          shareInfo[0].message && shareInfo[0].message.length > 0 && false &&
+          shareInfo[0].message && shareInfo[0].message.length > 0 &&
           <div className='share-message'>
             " {shareInfo[0].message} "
           </div>
