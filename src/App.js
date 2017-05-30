@@ -9,6 +9,7 @@ import Camera from './Camera.js';
 import moment from 'moment';
 import Cookie from 'js-cookie';
 import classNames from 'classnames';
+import Ghost from './Ghost.js';
 
 export default class extends Component {
 
@@ -73,6 +74,9 @@ export default class extends Component {
 
     return (
       <div className={appClass}>
+        {
+          false && this._renderGhost()
+        }
         <div className='container'>
           <div className='App-header'>
             <img src={process.env.PUBLIC_URL + '/solink.png'} />
@@ -96,8 +100,9 @@ export default class extends Component {
                 {
                   this.state.event.cameras.map((camera, idx) => {
                     console.debug('camera', camera)
+                    console.debug('playingUrl', this.state.playingUrl)
                     return (
-                      <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
+                      <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex && this.state.playingUrl.length > 0} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
                     )
                   })
                 }
@@ -141,6 +146,12 @@ export default class extends Component {
         </div>
       </div>
     );
+  }
+
+  _renderGhost() {
+    return (
+      <div id='ghost'><Ghost /></div>
+    )
   }
 
   _renderShareInfo() {
