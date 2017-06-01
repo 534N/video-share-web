@@ -31,6 +31,7 @@ export default class extends Component {
       },
       playingIndex: 0,
       dataReady: false,
+      playingUrl: '',
     };
   }
 
@@ -50,7 +51,7 @@ export default class extends Component {
       const url = CloudAPI.getPlaylist(res.event.cameras[this.state.playingIndex]);
 
       this.setState({
-        playingUrl: url,
+        playingUrl: url || '',
         info: res.info,
         event: res.event,
         dataReady: true,
@@ -99,10 +100,8 @@ export default class extends Component {
               <div className='cameras-panel'>
                 {
                   this.state.event.cameras.map((camera, idx) => {
-                    console.debug('camera', camera)
-                    console.debug('playingUrl', this.state.playingUrl)
                     return (
-                      <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex && this.state.playingUrl.length > 0} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
+                      <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex && this.state.playingUrl.length > 0} inProgress={this.state.playingUrl.length === 0} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
                     )
                   })
                 }
@@ -184,7 +183,7 @@ export default class extends Component {
 
     this.setState({
       playingIndex: index,
-      playingUrl: url,
+      playingUrl: url || '',
     });
   }
 }

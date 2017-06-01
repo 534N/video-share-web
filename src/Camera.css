@@ -14,7 +14,9 @@
     margin: 0 25px;
     -webkit-transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, margin 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
     transition: transform 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, margin 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
-    .camera[data-active=true] img {
+  .camera[data-inProgress=true] {
+    pointer-events: none; }
+    .camera[data-inProgress=true] img {
       border-bottom: 2px solid #0088cc;
       width: 100%; }
   .camera:hover[data-active=false] {
