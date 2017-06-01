@@ -46,12 +46,19 @@ export default class extends Component {
         });
       }
 
-      console.debug('event >>', res.event)
+      let url = '';
+      let playingIndex = 0;
+      res.event.cameras.forEach((camera, idx) => {
+        url = CloudAPI.getPlaylist(camera);
 
-      const url = CloudAPI.getPlaylist(res.event.cameras[this.state.playingIndex]);
+        if (url.length > 0) {
+          playingIndex = idx;
+        }
+      });
 
       this.setState({
         playingUrl: url || '',
+        playingIndex: playingIndex,
         info: res.info,
         event: res.event,
         dataReady: true,
