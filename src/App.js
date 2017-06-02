@@ -49,7 +49,7 @@ export default class extends Component {
       let url = '';
       let playingIndex = 0;
       res.event.cameras.forEach((camera, idx) => {
-        url = CloudAPI.getPlaylist(camera);
+        url = CloudAPI.getPlaylist(camera) || '';
 
         if (url.length > 0) {
           playingIndex = idx;
@@ -162,7 +162,7 @@ export default class extends Component {
 
   _renderShareInfo() {
     const shareInfo = this.state.event.shares.filter(share => {
-      return share.email === this.state.info.sharedTo || share.email === this.state.info.sharedBy;
+      return share.email === this.state.info.sharedTo;
     });
 
     if (shareInfo.length === 0) {
