@@ -42,8 +42,8 @@ body {
   top: 46%;
   left: 17%;
   box-shadow: -1px 2px 3px rgba(0, 0, 0, 0.5);
-  box-shadow--webkit-transform: rotate(18deg);
-  box-shadow--ms-transform: rotate(7deg); }
+    box-shadow--webkit-transform: rotate(18deg);
+    box-shadow--ms-transform: rotate(7deg); }
 
 .right-arm {
   position: absolute;
@@ -54,8 +54,8 @@ body {
   top: 46%;
   right: 17%;
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
-  box-shadow--webkit-transform: rotate(-18deg);
-  box-shadow--ms-transform: rotate(-7deg); }
+    box-shadow--webkit-transform: rotate(-18deg);
+    box-shadow--ms-transform: rotate(-7deg); }
 
 .body-bottom-far-left {
   position: absolute;
