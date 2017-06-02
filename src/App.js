@@ -155,10 +155,13 @@ export default class extends Component {
   }
 
   _renderShareInfo() {
-
     const shareInfo = this.state.event.shares.filter(share => {
-      return share.email === this.state.info.sharedTo;
+      return share.email === this.state.info.sharedTo || share.email === this.state.info.sharedBy;
     });
+
+    if (shareInfo.length === 0) {
+      return;
+    }
 
     let prefix = 'Shared By ';
 
