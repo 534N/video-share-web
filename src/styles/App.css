@@ -95,6 +95,23 @@
   width: 200px;
   height: 30px; }
 
+.App .container .App-header .inner-wrap .account {
+  display: flex;
+  align-items: center;
+  color: #888; }
+
+.App .container .App-header .inner-wrap .account .zmdi-account {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background: #f1f1f1;
+  font-size: 1.4em;
+  color: #aaa;
+  margin-right: 10px; }
+
 .App .container .app-body {
   box-sizing: border-box;
   position: relative;

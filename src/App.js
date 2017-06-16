@@ -120,14 +120,18 @@ export default class extends Component {
     const locationName = this.state.event.subtitle.split(' @ ')[1];
     return (
       <div className={appClass}>
-        
-        {
-          false && this._renderGhost()
-        }
         <div className='container'>
           <div className='App-header'>
             <div className='inner-wrap'>
               <img src={process.env.PUBLIC_URL + '/solink.png'} />
+              {
+                this.state.info &&
+                <div className='account'>
+                  <i className='zmdi zmdi-account' />
+                  {this.state.info.sharedTo}
+                </div>  
+              }
+              
             </div>
           </div>
           <div className={appBodayClass}>
