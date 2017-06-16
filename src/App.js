@@ -71,14 +71,13 @@ export default class extends Component {
         playingIndex: playingIndex,
         info: res.info,
         event: res.event,
+        showCamList: res.event.cameras.length > 1,
         dataReady: true,
       });
     })
   }
 
   render() {
-    
-
     const appClass = classNames(
       'App',
       {
@@ -98,14 +97,6 @@ export default class extends Component {
       'App-intro',
       {
         show: this.state.showCamList,
-      }
-    );
-
-    const upDownArrowClass = classNames(
-      'zmdi',
-      {
-        'zmdi-keyboard_arrow_up': this.state.showCamList,
-        'zmdi-keyboard_arrow_down': !this.state.showCamList,
       }
     );
 
@@ -182,7 +173,7 @@ export default class extends Component {
               {
                 this.state.event.cameras.length > 1 &&
                 <div className='handle' onClick={this._toggleShowCamList.bind(this)}>
-                  <i className={upDownArrowClass} />
+                  <span>{this.state.showCamList? 'HIDE CAMERAS' : 'SHOW CAMERAS'}</span>
                 </div>
               }
             </div>

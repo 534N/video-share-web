@@ -23,7 +23,7 @@
 
 .App.fake .container .App-intro .cameras-panel {
   justify-content: flex-start;
-  height: 140px; }
+  height: 120px; }
 
 .App.fake .container .App-intro .cameras-panel .camera {
   width: 147px;
@@ -60,6 +60,9 @@
   color: #eee;
   font-size: 1em; }
 
+.App.fake .container .App-details .right {
+  border-bottom: none !important; }
+
 .App.fake .container .App-details .right .right-fake {
   width: 200px;
   background: #eee;
@@ -80,7 +83,7 @@
   background: #fff;
   padding: 1em;
   box-sizing: border-box;
-  border-bottom: 1px solid #ddd; }
+  border-bottom: 1px solid #e8e8e8; }
 
 .App .container .App-header .inner-wrap {
   width: 1000px;
@@ -118,7 +121,7 @@
   padding: 1em; }
 
 .App .container .info-container {
-  transform: translate(0, -140px);
+  transform: translate(0, -120px);
   transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   display: flex;
   flex-direction: column;
@@ -138,18 +141,30 @@
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
 
 .App .container .info-container .App-intro .handle {
-  border-top: 1px solid #ddd;
-  margin: 0 1em; }
+  border-top: 1px solid #e2e2e2;
+  margin: 0 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666;
+  padding: 10px;
+  font-weight: 500;
+  box-sizing: border-box; }
 
-.App .container .info-container .App-intro .handle .zmdi {
-  font-size: 2em;
+.App .container .info-container .App-intro .handle span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
   cursor: pointer; }
 
 .App .container .info-container .App-intro .cameras-panel {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 140px; }
+  justify-content: flex-start;
+  height: 120px;
+  padding: 1em;
+  box-sizing: border-box; }
 
 .App .container .info-container .App-details {
   width: 1000px;
@@ -166,7 +181,7 @@
   align-items: flex-end;
   justify-content: flex-start;
   padding-bottom: 1em;
-  border-bottom: 1px solid #ddd; }
+  border-bottom: 1px solid #e2e2e2; }
 
 .App .container .info-container .App-details .title {
   color: #333;
@@ -190,7 +205,7 @@
   font-size: 13px;
   color: #222;
   font-weight: 100;
-  border-bottom: 1px solid #ddd; }
+  border-bottom: 1px solid #e2e2e2; }
 
 .App .container .info-container .App-details .right .entry {
   display: flex;

@@ -30,7 +30,7 @@
       .App-intro
         .cameras-panel
           justify-content: flex-start
-          height: 140px
+          height: 120px
           .camera
             width: 147px
             height: 84px
@@ -61,6 +61,7 @@
           color: #eee
           font-size: 1em
         .right
+          border-bottom: none !important
           .right-fake
             width: 200px
             background: #eee
@@ -80,7 +81,7 @@
       background: #fff
       padding: 1em
       box-sizing: border-box
-      border-bottom: 1px solid #ddd
+      border-bottom: 1px solid #e8e8e8
       .inner-wrap
         width: 1000px
         display: flex
@@ -113,7 +114,7 @@
           font-weight: 100
           padding: 1em
     .info-container
-      transform: translate(0, -140px)
+      transform: translate(0, -120px)
       transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms
       display: flex
       flex-direction: column
@@ -130,16 +131,28 @@
         box-sizing: border-box
         box-shadow: 0 1px 2px rgba(0,0,0,0.1)
         .handle
-          border-top: 1px solid #ddd
+          border-top: 1px solid #e2e2e2
           margin: 0 1em
-          .zmdi
-            font-size: 2em
+          display: flex
+          justify-content: center
+          align-items: center
+          color: #666
+          padding: 10px
+          font-weight: 500
+          box-sizing: border-box
+          span
+            display: flex
+            justify-content: center
+            align-items: center
+            font-size: 12px
             cursor: pointer
         .cameras-panel
           display: flex
           align-items: center
-          justify-content: center
-          height: 140px
+          justify-content: flex-start
+          height: 120px
+          padding: 1em
+          box-sizing: border-box
       .App-details
         width: 1000px
         box-sizing: border-box
@@ -154,7 +167,7 @@
           align-items: flex-end
           justify-content: flex-start
           padding-bottom: 1em
-          border-bottom: 1px solid #ddd
+          border-bottom: 1px solid #e2e2e2
         .title
           color: #333
           font-size: 1.3em
@@ -174,7 +187,7 @@
           font-size: 13px
           color: #222
           font-weight: 100
-          border-bottom: 1px solid #ddd
+          border-bottom: 1px solid #e2e2e2
           .entry
             display: flex
             align-items: center
