@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import Hls from 'connect-hls.js';
-import './Player.css';
+import './styles/Player.css';
 
 export default class extends Component {
   constructor(props) {

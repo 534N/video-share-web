@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 // import Hls from 'forked.hls.js';
-import './Camera.css';
+import './styles/Camera.css';
 
 export default class extends Component {
   constructor(props) {

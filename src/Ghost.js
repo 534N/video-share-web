@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import './Ghost.css';
+import './styles/Ghost.css';
 
 
 export default class extends Component {
