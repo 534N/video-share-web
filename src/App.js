@@ -158,6 +158,7 @@ export default class extends Component {
               {
                 this.state.event.cameras.length > 0 && this.state.dataReady &&
                 <div className={cameraPanelClass}>
+                  <div className='cameras'>
                   {
                     this.state.event.cameras.map((camera, idx) => {
                       return (
@@ -165,21 +166,26 @@ export default class extends Component {
                       )
                     })
                   }
+                  </div>
+                  {
+                    this.state.event.cameras.length > 1 &&  
+                    <div className='handle' onClick={this._toggleShowCamList.bind(this)}>
+                      <i className='zmdi zmdi-keyboard_arrow_down' />
+                    </div>
+                    
+                  }
                 </div>
               }
               {
                 !this.state.dataReady &&
                 <div className='cameras-panel'>
-                  <Camera camera={{}}/>
-                  <Camera camera={{}}/>
+                  <div className='cameras'>
+                    <Camera camera={{}}/>
+                    <Camera camera={{}}/>
+                  </div>
                 </div>
               }
-              {
-                this.state.event.cameras.length > 1 &&
-                <div className='handle' onClick={this._toggleShowCamList.bind(this)}>
-                  <span>{this.state.showCamList? 'HIDE CAMERAS' : 'SHOW CAMERAS'}</span>
-                </div>
-              }
+              
             </div>
             <div className='App-details'>
               <div className='left'>
@@ -188,6 +194,10 @@ export default class extends Component {
               {
                 this.state.dataReady &&
                 <div className='right'>
+                  <div className='entry'>
+                    <i className='zmdi zmdi-calendar'/> 
+                    <div>{moment(this.state.event.startTime).format('MMM Do, YYYY')}</div>
+                  </div>
                   <div className='entry'>
                     <i className='zmdi zmdi-schedule'/> 
                     <div>{start} - {end}</div>

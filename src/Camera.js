@@ -15,15 +15,13 @@ export default class extends Component {
   render() {
     return (
       <div className='camera' data-active={this.props.active} data-inProgress={this.props.inProgress} onClick={this._cameraClick.bind(this, this.props.index)} >
-        <div className='overlay'>
-          <div className='camera-name'>{this.props.camera.name}</div>
-
-        </div>
+        <div className='overlay' />
         <img src={this.props.camera.thumbnail} />
         {
           this.props.inProgress &&
           <div style={{fontSize: '12px'}}>Processing...</div>
         }
+        <div className='camera-name'>{this.props.camera.name}</div>
       </div>
     )
     

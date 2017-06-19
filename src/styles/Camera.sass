@@ -3,34 +3,30 @@
 .camera
   padding: 11px
   box-sizing: border-box
-  opacity: 0.6
+  opacity: 0.8
   cursor: pointer
   position: relative
   width: 165px
-  transform: scale(1)
   margin-top: 3px
-  @include transition(transform 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, margin 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms)
   &[data-active=true]
     opacity: 1
-    transform: scale(1.1)
-    margin: 3px 10px 0
-    @include transition(transform 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms, margin 500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms)
-    img
+    .camera-name
       border-bottom: 2px solid #0088cc
   &[data-inProgress=true]
     pointer-events: none
-    
     img
-      border-bottom: 2px solid #0088cc
       width: 100%
   &:hover[data-active=false]
     opacity: 1
-    img
-      border-bottom: 2px solid #0088cc
   img
-    border-bottom: 2px solid transparent
     width: 100%
-
+  .camera-name
+    font-weight: 100
+    background: #f5f5f5
+    padding: 5px 0
+    font-size: 16px
+    transform: translate(0, 16px)
+    border-bottom: 2px solid transparent
   .overlay
     position: absolute
     background: transparent

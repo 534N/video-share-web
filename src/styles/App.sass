@@ -27,46 +27,48 @@
           display: flex
           justify-content: center
           align-items: center
-      .App-intro
-        .cameras-panel
-          justify-content: flex-start
-          height: 120px
-          .camera
-            width: 147px
-            height: 84px
-            background: #eee
-            margin-left: 20px
-            .overlay
-              opacity: 0
-      .App-details
-        padding: 1em
-        .title
-          width: 250px
-          background: #ddd
-          border-radius: 100px
-          color: #ddd
-          font-size: 1em
-        .sub-title
-          width: 200px
-          height: 20px
-          background: #eee
-          border-radius: 100px
-          color: #eee
-          font-size: 1em
-        .description
-          width: 500px
-          height: 15px
-          background: #eee
-          border-radius: 100px
-          color: #eee
-          font-size: 1em
-        .right
-          border-bottom: none !important
-          .right-fake
-            width: 200px
-            background: #eee
-            height: 10px
+      .info-container
+
+        .App-intro
+          .cameras-panel
+            justify-content: flex-start
+            height: 120px
+            .camera
+              width: 147px
+              height: 84px
+              background: #eee
+              margin-left: 20px
+              .overlay
+                opacity: 0
+        .App-details
+          padding: 1em
+          .title
+            width: 250px
+            background: #ddd
             border-radius: 100px
+            color: #ddd
+            font-size: 1em
+          .sub-title
+            width: 200px
+            height: 20px
+            background: #eee
+            border-radius: 100px
+            color: #eee
+            font-size: 1em
+          .description
+            width: 500px
+            height: 15px
+            background: #eee
+            border-radius: 100px
+            color: #eee
+            font-size: 1em
+          .right
+            border-bottom: none !important
+            .right-fake
+              width: 200px
+              background: #eee
+              height: 10px
+              border-radius: 100px
 
   .container
     width: 100%
@@ -128,7 +130,7 @@
           font-weight: 100
           padding: 1em
     .info-container
-      transform: translate(0, -120px)
+      transform: translate(0, -110px)
       transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms
       display: flex
       flex-direction: column
@@ -140,33 +142,40 @@
         background: #fff
         z-index: 1
         position: relative
-        margin-left: 2px
-        width: 986px
+        width: 1000px
         box-sizing: border-box
         box-shadow: 0 1px 2px rgba(0,0,0,0.1)
+        &.show
+          .cameras-panel
+            .camera-name
+              transform: translate(0, 5px)
+          .handle
+            transform: translate(0, -8px) rotate(180deg)
+            background: #333
+            color: #fff
+
         .handle
-          border-top: 1px solid #e2e2e2
-          margin: 0 1em
           display: flex
           justify-content: center
           align-items: center
           color: #666
-          padding: 10px
           font-weight: 500
           box-sizing: border-box
-          span
-            display: flex
-            justify-content: center
-            align-items: center
-            font-size: 12px
+          transform: translate(0, 4px) rotate(0deg)
+          .zmdi
             cursor: pointer
+            font-size: 1.5em
         .cameras-panel
           display: flex
-          align-items: center
-          justify-content: flex-start
-          height: 120px
+          align-items: flex-end
+          justify-content: space-between
+          height: 160px
           padding: 1em
           box-sizing: border-box
+          .cameras
+            display: flex
+            justify-content: flex-start
+            align-items: center
       .App-details
         width: 1000px
         box-sizing: border-box
@@ -312,7 +321,8 @@
               .camera
                 background: #444
                 margin: 0
-                box-sizing: border-box          
+                box-sizing: border-box   
+                margin-right: 1em       
           .App-details
             width: 100%
             padding: 8px
@@ -339,6 +349,8 @@
             margin: 0 !important
             width: 118px !important
             height: 22px !important
+          .account
+            display: none
         .right
           padding-bottom: 0 !important
       .app-body
@@ -366,14 +378,20 @@
             justify-content: flex-start
             box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
             &.single
-              display: none
+              img
+                display: none
+              .camera
+                padding: 0
+                .camera-name
+                  transform: translate(0, 0)
             .camera
               min-width: 165px
               &[data-active=true]
                 transform: scale(1)
                 margin: 0
-                img
-                  border-bottom: 2px solid #0088cc
+              .camera-name
+                background: rgba(80,80,80,1)
+                color: #fff
           .handle
             display: none
         .App-details
@@ -415,6 +433,7 @@
               .camera
                 background: #444
                 margin: 0
+                margin-right: 1em
           .App-details
             width: 100%
             padding: 8px
@@ -441,6 +460,8 @@
             margin: 0 !important
             width: 118px !important
             height: 22px !important
+          .account
+            display: none
         .right
           padding-bottom: 0 !important
       .app-body
@@ -468,14 +489,20 @@
             justify-content: flex-start
             box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
             &.single
-              display: none
+              img
+                display: none
+              .camera
+                padding: 0
+                .camera-name
+                  transform: translate(0, 0)
             .camera
               min-width: 165px
               &[data-active=true]
                 transform: scale(1)
                 margin: 0
-                img
-                  border-bottom: 2px solid #0088cc
+              .camera-name
+                background: rgba(80,80,80,1)
+                color: #fff
           .handle
             display: none
         .App-details
@@ -517,6 +544,7 @@
               .camera
                 background: #444
                 margin: 0
+                margin-right: 1em
           .App-details
             width: 100%
             padding: 8px
@@ -543,6 +571,8 @@
             margin: 0 !important
             width: 118px !important
             height: 22px !important
+          .account
+            display: none
           .right
             padding-bottom: 0 !important
       .app-body
@@ -569,14 +599,20 @@
             justify-content: flex-start
             box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
             &.single
-              display: none
+              img
+                display: none
+              .camera
+                padding: 0
+                .camera-name
+                  transform: translate(0, 0)
             .camera
               min-width: 165px
               &[data-active=true]
                 transform: scale(1)
                 margin: 0
-                img
-                  border-bottom: 2px solid #0088cc
+              .camera-name
+                background: rgba(80,80,80,1)
+                color: #fff    
         .App-details
           width: calc(100% - 16px)
           padding: 8px
@@ -616,6 +652,7 @@
               .camera
                 background: #444
                 margin: 0
+                margin-right: 1em
           .App-details
             width: 100%
             padding: 8px
@@ -643,6 +680,8 @@
             margin: 0 !important
             width: 118px !important
             height: 22px !important
+          .account
+            display: none
         .right
           padding-bottom: 0 !important
       .app-body
@@ -670,14 +709,20 @@
             justify-content: flex-start
             box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6)
             &.single
-              display: none
+              img
+                display: none
+              .camera
+                padding: 0
+                .camera-name
+                  transform: translate(0, 0)
             .camera
               min-width: 165px
               &[data-active=true]
                 transform: scale(1)
                 margin: 0
-                img
-                  border-bottom: 2px solid #0088cc
+              .camera-name
+                background: rgba(80,80,80,1)
+                color: #fff
           .handle
             display: none
         .App-details

@@ -21,30 +21,30 @@
   justify-content: center;
   align-items: center; }
 
-.App.fake .container .App-intro .cameras-panel {
+.App.fake .container .info-container .App-intro .cameras-panel {
   justify-content: flex-start;
   height: 120px; }
 
-.App.fake .container .App-intro .cameras-panel .camera {
+.App.fake .container .info-container .App-intro .cameras-panel .camera {
   width: 147px;
   height: 84px;
   background: #eee;
   margin-left: 20px; }
 
-.App.fake .container .App-intro .cameras-panel .camera .overlay {
+.App.fake .container .info-container .App-intro .cameras-panel .camera .overlay {
   opacity: 0; }
 
-.App.fake .container .App-details {
+.App.fake .container .info-container .App-details {
   padding: 1em; }
 
-.App.fake .container .App-details .title {
+.App.fake .container .info-container .App-details .title {
   width: 250px;
   background: #ddd;
   border-radius: 100px;
   color: #ddd;
   font-size: 1em; }
 
-.App.fake .container .App-details .sub-title {
+.App.fake .container .info-container .App-details .sub-title {
   width: 200px;
   height: 20px;
   background: #eee;
@@ -52,7 +52,7 @@
   color: #eee;
   font-size: 1em; }
 
-.App.fake .container .App-details .description {
+.App.fake .container .info-container .App-details .description {
   width: 500px;
   height: 15px;
   background: #eee;
@@ -60,10 +60,10 @@
   color: #eee;
   font-size: 1em; }
 
-.App.fake .container .App-details .right {
+.App.fake .container .info-container .App-details .right {
   border-bottom: none !important; }
 
-.App.fake .container .App-details .right .right-fake {
+.App.fake .container .info-container .App-details .right .right-fake {
   width: 200px;
   background: #eee;
   height: 10px;
@@ -138,7 +138,7 @@
   padding: 1em; }
 
 .App .container .info-container {
-  transform: translate(0, -120px);
+  transform: translate(0, -110px);
   transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   display: flex;
   flex-direction: column;
@@ -152,36 +152,43 @@
   background: #fff;
   z-index: 1;
   position: relative;
-  margin-left: 2px;
-  width: 986px;
+  width: 1000px;
   box-sizing: border-box;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
 
+.App .container .info-container .App-intro.show .cameras-panel .camera-name {
+  transform: translate(0, 5px); }
+
+.App .container .info-container .App-intro.show .handle {
+  transform: translate(0, -8px) rotate(180deg);
+  background: #333;
+  color: #fff; }
+
 .App .container .info-container .App-intro .handle {
-  border-top: 1px solid #e2e2e2;
-  margin: 0 1em;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #666;
-  padding: 10px;
   font-weight: 500;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  transform: translate(0, 4px) rotate(0deg); }
 
-.App .container .info-container .App-intro .handle span {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  cursor: pointer; }
+.App .container .info-container .App-intro .handle .zmdi {
+  cursor: pointer;
+  font-size: 1.5em; }
 
 .App .container .info-container .App-intro .cameras-panel {
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  height: 120px;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 160px;
   padding: 1em;
   box-sizing: border-box; }
+
+.App .container .info-container .App-intro .cameras-panel .cameras {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center; }
 
 .App .container .info-container .App-details {
   width: 1000px;
@@ -321,7 +328,8 @@
   .App.fake .container .info-container .App-intro .cameras-panel .camera {
     background: #444;
     margin: 0;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    margin-right: 1em; }
   .App.fake .container .info-container .App-details {
     width: 100%;
     padding: 8px; }
@@ -348,6 +356,8 @@
     margin: 0 !important;
     width: 118px !important;
     height: 22px !important; }
+  .App .container .App-header .inner-wrap .account {
+    display: none; }
   .App .container .App-header .right {
     padding-bottom: 0 !important; }
   .App .container .app-body {
@@ -374,15 +384,20 @@
     overflow-x: scroll;
     justify-content: flex-start;
     box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
-  .App .container .info-container .App-intro .cameras-panel.single {
+  .App .container .info-container .App-intro .cameras-panel.single img {
     display: none; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera {
+    padding: 0; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera .camera-name {
+    transform: translate(0, 0); }
   .App .container .info-container .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] {
     transform: scale(1);
     margin: 0; }
-  .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] img {
-    border-bottom: 2px solid #0088cc; }
+  .App .container .info-container .App-intro .cameras-panel .camera .camera-name {
+    background: #505050;
+    color: #fff; }
   .App .container .info-container .App-intro .handle {
     display: none; }
   .App .container .info-container .App-details {
@@ -419,7 +434,8 @@
     box-sizing: border-box; }
   .App.fake .container .info-container .App-intro .cameras-panel .camera {
     background: #444;
-    margin: 0; }
+    margin: 0;
+    margin-right: 1em; }
   .App.fake .container .info-container .App-details {
     width: 100%;
     padding: 8px; }
@@ -446,6 +462,8 @@
     margin: 0 !important;
     width: 118px !important;
     height: 22px !important; }
+  .App .container .App-header .inner-wrap .account {
+    display: none; }
   .App .container .App-header .right {
     padding-bottom: 0 !important; }
   .App .container .app-body {
@@ -472,15 +490,20 @@
     overflow-x: scroll;
     justify-content: flex-start;
     box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
-  .App .container .info-container .App-intro .cameras-panel.single {
+  .App .container .info-container .App-intro .cameras-panel.single img {
     display: none; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera {
+    padding: 0; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera .camera-name {
+    transform: translate(0, 0); }
   .App .container .info-container .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] {
     transform: scale(1);
     margin: 0; }
-  .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] img {
-    border-bottom: 2px solid #0088cc; }
+  .App .container .info-container .App-intro .cameras-panel .camera .camera-name {
+    background: #505050;
+    color: #fff; }
   .App .container .info-container .App-intro .handle {
     display: none; }
   .App .container .info-container .App-details {
@@ -517,7 +540,8 @@
     box-sizing: border-box; }
   .App.fake .container .info-container .App-intro .cameras-panel .camera {
     background: #444;
-    margin: 0; }
+    margin: 0;
+    margin-right: 1em; }
   .App.fake .container .info-container .App-details {
     width: 100%;
     padding: 8px; }
@@ -544,6 +568,8 @@
     margin: 0 !important;
     width: 118px !important;
     height: 22px !important; }
+  .App .container .App-header .inner-wrap .account {
+    display: none; }
   .App .container .App-header .inner-wrap .right {
     padding-bottom: 0 !important; }
   .App .container .app-body {
@@ -569,15 +595,20 @@
     overflow-x: scroll;
     justify-content: flex-start;
     box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
-  .App .container .info-container .App-intro .cameras-panel.single {
+  .App .container .info-container .App-intro .cameras-panel.single img {
     display: none; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera {
+    padding: 0; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera .camera-name {
+    transform: translate(0, 0); }
   .App .container .info-container .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] {
     transform: scale(1);
     margin: 0; }
-  .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] img {
-    border-bottom: 2px solid #0088cc; }
+  .App .container .info-container .App-intro .cameras-panel .camera .camera-name {
+    background: #505050;
+    color: #fff; }
   .App .container .info-container .App-details {
     width: calc(100% - 16px);
     padding: 8px;
@@ -612,7 +643,8 @@
     box-sizing: border-box; }
   .App.fake .container .info-container .App-intro .cameras-panel .camera {
     background: #444;
-    margin: 0; }
+    margin: 0;
+    margin-right: 1em; }
   .App.fake .container .info-container .App-details {
     width: 100%;
     padding: 8px; }
@@ -640,6 +672,8 @@
     margin: 0 !important;
     width: 118px !important;
     height: 22px !important; }
+  .App .container .App-header .inner-wrap .account {
+    display: none; }
   .App .container .App-header .right {
     padding-bottom: 0 !important; }
   .App .container .app-body {
@@ -666,15 +700,20 @@
     overflow-x: scroll;
     justify-content: flex-start;
     box-shadow: inset 0 -3px 12px 0px rgba(0, 0, 0, 0.6); }
-  .App .container .info-container .App-intro .cameras-panel.single {
+  .App .container .info-container .App-intro .cameras-panel.single img {
     display: none; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera {
+    padding: 0; }
+  .App .container .info-container .App-intro .cameras-panel.single .camera .camera-name {
+    transform: translate(0, 0); }
   .App .container .info-container .App-intro .cameras-panel .camera {
     min-width: 165px; }
   .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] {
     transform: scale(1);
     margin: 0; }
-  .App .container .info-container .App-intro .cameras-panel .camera[data-active=true] img {
-    border-bottom: 2px solid #0088cc; }
+  .App .container .info-container .App-intro .cameras-panel .camera .camera-name {
+    background: #505050;
+    color: #fff; }
   .App .container .info-container .App-intro .handle {
     display: none; }
   .App .container .info-container .App-details {
