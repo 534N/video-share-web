@@ -41,7 +41,6 @@ export default class extends Component {
     const token = search.split('token=')[1];
 
     CloudAPI.parseToken(token).then(res => {
-
       if (res.err) {
         this.setState({
           err: true,
@@ -74,6 +73,14 @@ export default class extends Component {
         showCamList: res.event.cameras.length > 1,
         dataReady: true,
       });
+
+      if (res.event.pushToCloudStatus === 'inProgress') {
+        this._pollEvent(5000);
+        this.setState({
+          inProgress: true,
+          bannerMessage: 'The event is being updated...',
+        });
+      }
     })
   }
 
@@ -114,6 +121,13 @@ export default class extends Component {
       }
     );
 
+    const inProgressBannerClass = classNames(
+      'banner',
+      {
+        active: this.state.inProgress,
+      }
+    );
+
     const start = `${moment(this.state.event.startTime).format('hh:mm:ss')}`;
     const end = `${moment(this.state.event.endTime).format('hh:mm:ss')}`;
 
@@ -141,6 +155,7 @@ export default class extends Component {
                 <span className='text'>The requested resouce is unavailable</span>
               </div>
             }
+            <div className={inProgressBannerClass}>{this.state.bannerMessage}</div>
             {
               this.state.dataReady &&
               <Player url={this.state.playingUrl}  />
@@ -218,15 +233,6 @@ export default class extends Component {
                 {this.state.event.details.description}
               </div>
             </div>
-            {
-              false &&
-              <div className='App-share-info'>
-                {
-                  this.state.dataReady && 
-                  this._renderShareInfo()
-                }
-              </div>
-            }
           </div>
         </div>
       </div>
@@ -239,31 +245,37 @@ export default class extends Component {
     )
   }
 
-  _renderShareInfo() {
-    const shareInfo = this.state.event.shares.filter(share => {
-      return share.email === this.state.info.sharedTo;
-    });
+  _pollEvent(interval) {
+    const { search } = this.props.location;
+    const token = search.split('token=')[1];
 
-    if (shareInfo.length === 0) {
-      return;
-    }
+    this.polling = setInterval(() => {
 
-    let prefix = 'Shared By ';
+      CloudAPI.parseToken(token).then(res => {
 
-    return (
-      <div className='share-info'>
-        <div className='share-header'>
-          <div>{prefix}<span className='email'>{shareInfo[0].sharedBy}</span></div>
-          <div>{moment(new Date(shareInfo[0].sharedAt)).format('h:mm:ss a')}</div>
-        </div>
-        {
-          shareInfo[0].message && shareInfo[0].message.length > 0 &&
-          <div className='share-message'>
-            " {shareInfo[0].message} "
-          </div>
+        console.debug(res.event.pushToCloudStatus);
+
+        if (res.event.pushToCloudStatus !== 'inProgress') {
+          clearInterval(this.polling);
+
+          this._handleCameraChange(this.state.playingIndex);
+
+          this.setState({
+            info: res.info,
+            event: res.event,
+            inProgress: false,
+            bannerMessage: null,
+            dataReady: false,
+          });
+
+          this.setTimeout(() => {
+            this.setState({
+              dataReady: true
+            }, 10)
+          })
         }
-      </div>
-    )
+      })
+    }, interval);
   }
 
   _toggleShowCamList() {
