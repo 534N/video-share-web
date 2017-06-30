@@ -17,7 +17,7 @@ module.exports = {
   },
 
   parseToken: function(token='') {
-    const url = `https://cloudvms.solinkcloud.com/share/${token}`;
+    const url = `https://vms.solinkcloud.com/share/${token}`;
     return fetch(url).then((res, err) => {
       return res.json();
     }).catch(err => {
