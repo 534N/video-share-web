@@ -1,5 +1,6 @@
 'use strict';
 
+import Settings from './settings';
 
 module.exports = {
   getPlaylist: function(camera) {
@@ -17,7 +18,7 @@ module.exports = {
   },
 
   parseToken: function(token='') {
-    const url = `https://int-cloudvms.solinkcloud.com/share/${token}`;
+    const url = `${Settings.cloud_vms_host}/share/${token}`;
     return fetch(url).then((res, err) => {
       return res.json();
     }).catch(err => {
