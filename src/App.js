@@ -51,7 +51,7 @@ export default class extends Component {
 
       if (res.cookies) {
         res.cookies.forEach(cookie => {
-          Cookie.set(cookie.name, cookie.value, {domain: '.solinkshare.io'});
+          Cookie.set(cookie.name, cookie.value, {domain: '.solinkshare.io', path: `/${res.info.tenantId}/shares/${res.info.eventId}/`});
         });
       }
 
