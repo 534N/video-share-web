@@ -76,10 +76,6 @@ export default class extends Component {
           inProgress: true,
           bannerMessage: 'The event is being updated...',
         });
-      } else if (res.event.pushToCloudStatus === 'complete') {
-        this.setState({
-          inProgress: false,
-        });
       }
     })
   }
