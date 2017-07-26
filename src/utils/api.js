@@ -1,5 +1,3 @@
-'use strict';
-
 import Settings from './settings';
 
 module.exports = {

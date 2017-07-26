@@ -1,14 +1,8 @@
-'use strict';
-
 import React, { Component } from 'react';
 import Hls from 'connect-hls.js';
 import './styles/Player.css';
 
 export default class extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     this._initHLS(this.props.url);
   }
@@ -40,8 +34,6 @@ export default class extends Component {
       },
       debug: false,
     };
-
-    const vid = this.refs.player;
 
     if (this.hls) {
       this.hls.destroy();

@@ -1,27 +1,26 @@
-'use strict';
-
 import React, { Component } from 'react';
 // import Hls from 'forked.hls.js';
 import './styles/Camera.css';
 
 export default class extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  componentDidMount() {
-  }
-
   render() {
+
+    console.debug(this.props.camera)
+
     return (
       <div className='camera' data-active={this.props.active} data-inProgress={this.props.inProgress} onClick={this._cameraClick.bind(this, this.props.index)} >
         <div className='overlay' />
-        <img src={this.props.camera.thumbnail} />
+        <img alt='' src={this.props.camera.thumbnail} />
         {
           this.props.inProgress &&
           <div style={{fontSize: '12px'}}>Processing...</div>
         }
-        <div className='camera-name'>{this.props.camera.name}</div>
+        <div className='camera-name flex-center'>
+          {this.props.camera.name}
+          <a download='just_a_test.mp4' href={this._getDownloadLink(this.props.camera)}>
+            <i className='icon-button blue zmdi zmdi-cloud_download' />
+          </a>
+        </div>
       </div>
     )
     
@@ -31,4 +30,18 @@ export default class extends Component {
     this.props.onCameraChange(index);
   }
 
-}
+  _getDownloadLink(camera) {
+    let url;
+    
+    if (camera && camera.streams) {
+      camera.streams.forEach(stream => {
+        if (stream.playlist) {
+          url = stream.download;
+        }
+      });
+    }
+
+    return url;
+  }
+
+} 

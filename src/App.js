@@ -1,7 +1,4 @@
-'use strict';
-
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './styles/App.css';
 
 import CloudAPI from './utils/api.js'
@@ -10,7 +7,6 @@ import Camera from './Camera.js';
 import moment from 'moment';
 import Cookie from 'js-cookie';
 import classNames from 'classnames';
-import Ghost from './Ghost.js';
 
 export default class extends Component {
 
@@ -80,6 +76,10 @@ export default class extends Component {
           inProgress: true,
           bannerMessage: 'The event is being updated...',
         });
+      } else if (res.event.pushToCloudStatus === 'complete') {
+        this.setState({
+          inProgress: false,
+        });
       }
     })
   }
@@ -137,7 +137,7 @@ export default class extends Component {
         <div className='container'>
           <div className='App-header'>
             <div className='inner-wrap'>
-              <img src={process.env.PUBLIC_URL + '/solink.png'} />
+              <img alt='' src={process.env.PUBLIC_URL + '/solink.png'} />
               {
                 this.state.info &&
                 <div className='account'>
@@ -163,7 +163,7 @@ export default class extends Component {
             {
               !this.state.dataReady &&
               <div className='player-fake'>
-                <img src={process.env.PUBLIC_URL + '/svg/loading-spokes.svg'} />
+                <img alt='' src={process.env.PUBLIC_URL + '/svg/loading-spokes.svg'} />
               </div>
             }
           </div>
@@ -237,12 +237,6 @@ export default class extends Component {
         </div>
       </div>
     );
-  }
-
-  _renderGhost() {
-    return (
-      <div id='ghost'><Ghost /></div>
-    )
   }
 
   _pollEvent(interval) {
