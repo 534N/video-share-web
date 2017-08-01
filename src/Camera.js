@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-// import Hls from 'forked.hls.js';
+import CloudAPI from './utils/api.js'
 import './styles/Camera.css';
 
 export default class extends Component {
   render() {
-
-    console.debug(this.props.camera)
+    const inProgress = !CloudAPI.getPlaylist(this.props.camera);
 
     return (
-      <div className='camera' data-active={this.props.active} data-inProgress={this.props.inProgress} onClick={this._cameraClick.bind(this, this.props.index)} >
-        <div className='overlay' />
+      <div className='camera' data-active={this.props.active} data-inProgress={inProgress} onClick={this._cameraClick.bind(this, this.props.index)} >
+        <div className='overlay' >
+          {
+            inProgress &&
+            <div className='banner' style={{fontSize: '12px'}}>Processing...</div>
+          }
+        </div>
         <img alt='' src={this.props.camera.thumbnail} />
-        {
-          this.props.inProgress &&
-          <div style={{fontSize: '12px'}}>Processing...</div>
-        }
+        
         <div className='camera-name flex-center'>
           {this.props.camera.name}
           <a download='just_a_test.mp4' href={this._getDownloadLink(this.props.camera)}>

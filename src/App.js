@@ -52,18 +52,17 @@ export default class extends Component {
       }
 
       let url = '';
-      let playingIndex = 0;
       res.event.cameras.forEach((camera, idx) => {
         url = CloudAPI.getPlaylist(camera) || '';
 
         if (url.length > 0) {
-          playingIndex = idx;
+          this.setState({
+            playingUrl: url,
+          });
         }
       });
 
       this.setState({
-        playingUrl: url || '',
-        playingIndex: playingIndex,
         info: res.info,
         event: res.event,
         showCamList: res.event.cameras.length > 1,
@@ -173,7 +172,12 @@ export default class extends Component {
                   {
                     this.state.event.cameras.map((camera, idx) => {
                       return (
-                        <Camera key={camera.id} camera={camera} active={idx === this.state.playingIndex && this.state.playingUrl.length > 0} inProgress={this.state.playingUrl.length === 0} index={idx} onCameraChange={this._handleCameraChange.bind(this)}/>
+                        <Camera
+                          key={camera.id}
+                          camera={camera}
+                          active={idx === this.state.playingIndex && this.state.playingUrl.length > 0}
+                          index={idx}
+                          onCameraChange={this._handleCameraChange.bind(this)} />
                       )
                     })
                   }
@@ -258,7 +262,7 @@ export default class extends Component {
             dataReady: false,
           });
 
-          this.setTimeout(() => {
+          setTimeout(() => {
             this.setState({
               dataReady: true
             }, 10)
