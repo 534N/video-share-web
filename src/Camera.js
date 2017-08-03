@@ -20,7 +20,7 @@ export default class extends Component {
             downloadURL &&
             <div className='download'>
               <a download='just_a_test.mp4' href={downloadURL}>
-                <i className='icon-button white zmdi zmdi-cloud_download' />
+                <i className='icon-button white zmdi zmdi-download' />
               </a>
             </div>
           }
