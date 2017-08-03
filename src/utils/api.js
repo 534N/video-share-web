@@ -18,7 +18,7 @@ module.exports = {
   parseToken: function(token='', poll=false) {
     let url = `${Settings.cloud_vms_host}/share/${token}`;
     if (poll) {
-      url = url + '&poll=true';
+      url = url + '?poll=true';
     }
 
     return fetch(url).then((res, err) => {
