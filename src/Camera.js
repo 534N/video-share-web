@@ -16,18 +16,20 @@ export default class extends Component {
             inProgress &&
             <div className='banner' style={{fontSize: '12px'}}>Processing...</div>
           }
+          {
+            downloadURL &&
+            <div className='download'>
+              <a download='just_a_test.mp4' href={downloadURL}>
+                <i className='icon-button white zmdi zmdi-cloud_download' />
+              </a>
+            </div>
+          }
         </div>
         <img alt='' src={this.props.camera.thumbnail} />
         
         <div className='camera-name flex-center'>
           
-          <Tooltip text={this.props.camera.name} width={downloadURL ? 100 : 140}/>
-          {
-            downloadURL &&
-            <a download='just_a_test.mp4' href={downloadURL}>
-              <i className='icon-button blue zmdi zmdi-cloud_download' />
-            </a>
-          }
+          <Tooltip text={this.props.camera.name} />
         </div>
       </div>
     )

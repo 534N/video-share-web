@@ -123,8 +123,8 @@ export default class extends Component {
       }
     );
 
-    const start = `${moment(this.state.event.startTime).format('hh:mm:ss')}`;
-    const end = `${moment(this.state.event.endTime).format('hh:mm:ss')}`;
+    const start = `${moment(this.state.event.startTime).format('HH:mm:ss')}`;
+    const end = `${moment(this.state.event.endTime).format('HH:mm:ss')}`;
 
     const locationName = this.state.event.subtitle.split(' @ ')[1];
     return (

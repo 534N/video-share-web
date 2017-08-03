@@ -1,7 +1,8 @@
-$ipad-landscape: "only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) and (-webkit-min-device-pixel-ratio : 2)"
-$ipad-portrait: "only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) and (-webkit-min-device-pixel-ratio : 2)"
-$ipad-mini-landscape: "only screen and (min-device-width: 1024px) and (max-device-height: 768px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2)"
-$ipad-mini-portrait: "only screen and (min-device-width: 768px) and (max-device-height: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)"
+$ipad-landscape: "only screen and (device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio : 2)"
+$ipad-portrait: "only screen and (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio : 2)"
+
+$ipad-mini-landscape: "only screen and (device-width: 768px) and (device-height: 1024px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)"
+$ipad-mini-portrait: "only screen and (device-width: 768px) and (device-height: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)"
 
 $iphone-5-portrait: "only screen and (device-width: 320px) and (device-height: 568px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)"
 $iphone-6-portrait: "only screen and (device-width: 375px) and (device-height: 667px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2)"
@@ -13,4 +14,6 @@ $Samsung-s6-portrait: 'only screen and (device-width: 360px) and (device-height:
 
 
 $big-screen: "only screen and (min-width: 1600px)"
-$small-screen: "only screen and (max-width: 1200px) and (min-width: 600px)"
+$medium-screen: "only screen and (max-width: 1600px) and (min-width: 1200px)"
+$small-screen: "only screen and (max-width: 1200px) and (min-width: 800px)"
+$tiny-screen: "only screen and (max-width: 800px) and (min-width: 600px)"

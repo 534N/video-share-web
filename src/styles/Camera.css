@@ -4,7 +4,6 @@
   opacity: 0.8;
   cursor: pointer;
   position: relative;
-  width: 165px;
   margin-top: 3px; }
 
 .camera[data-active=true] {
@@ -21,9 +20,6 @@
 
 .camera:hover[data-active=false] {
   opacity: 1; }
-
-.camera img {
-  width: 100%; }
 
 .camera .camera-name {
   font-weight: 100;
@@ -48,6 +44,17 @@
 .camera .overlay .banner {
   padding: 5px;
   background: #0088cc;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.camera .overlay .download {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.2);
   color: #fff; }
 
 .camera .overlay .camera-name {

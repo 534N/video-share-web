@@ -21,7 +21,7 @@ export default class extends Component {
     );
 
     return (
-      <div ref='tooltipContainer' className='tooltip-container' style={{width: `${this.props.width}px`}} onMouseOver={this._handleMouseOver.bind(this)} onMouseOut={this._handleMouseOut.bind(this)}>
+      <div ref='tooltipContainer' className='tooltip-container' onMouseOver={this._handleMouseOver.bind(this)} onMouseOut={this._handleMouseOut.bind(this)}>
         <span>{this.props.text}</span>
         <div className={tooltipClass} style={{transform: `translate(${this.state.tooltipOffset}px, 0)`}}>{this.props.text}</div>
       </div>
