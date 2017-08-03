@@ -17,8 +17,12 @@ module.exports = {
     return url;
   },
 
-  parseToken: function(token='') {
-    const url = `${Settings.cloud_vms_host}/share/${token}`;
+  parseToken: function(token='', poll=false) {
+    let url = `${Settings.cloud_vms_host}/share/${token}`;
+    if (poll) {
+      url = url + '?poll=true';
+    }
+
     return fetch(url).then((res, err) => {
       return res.json();
     }).catch(err => {
