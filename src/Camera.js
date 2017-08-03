@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import CloudAPI from './utils/api.js'
+import Tooltip from './Tooltip';
 import './styles/Camera.css';
 
 export default class extends Component {
   render() {
     const inProgress = !CloudAPI.getPlaylist(this.props.camera);
+    const downloadURL = this._getDownloadLink(this.props.camera);
+
 
     return (
       <div className='camera' data-active={this.props.active} data-inProgress={inProgress} onClick={this._cameraClick.bind(this, this.props.index)} >
@@ -17,10 +20,14 @@ export default class extends Component {
         <img alt='' src={this.props.camera.thumbnail} />
         
         <div className='camera-name flex-center'>
-          {this.props.camera.name}
-          <a download='just_a_test.mp4' href={this._getDownloadLink(this.props.camera)}>
-            <i className='icon-button blue zmdi zmdi-cloud_download' />
-          </a>
+          
+          <Tooltip text={this.props.camera.name} width={downloadURL ? 100 : 140}/>
+          {
+            downloadURL &&
+            <a download='just_a_test.mp4' href={downloadURL}>
+              <i className='icon-button blue zmdi zmdi-cloud_download' />
+            </a>
+          }
         </div>
       </div>
     )
