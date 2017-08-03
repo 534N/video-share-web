@@ -1,12 +1,10 @@
-'use strict';
-
 import Settings from './settings';
 
 module.exports = {
   getPlaylist: function(camera) {
     let url;
     
-    if (camera) {
+    if (camera && camera.streams) {
       camera.streams.forEach(stream => {
         if (stream.playlist) {
           url = stream.playlist;

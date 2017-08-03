@@ -1,0 +1,13 @@
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-content: center; }
+
+.icon-button {
+  cursor: pointer;
+  opacity: 0.9;
+  font-size: 1.1em; }
+  .icon-button:hover {
+    opacity: 1; }
+  .icon-button.blue {
+    color: #0088cc; }

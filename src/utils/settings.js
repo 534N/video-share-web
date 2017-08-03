@@ -1,5 +1,3 @@
-'use strict';
-
 let CLOUD_VMS_HOST_NAME = 'https://cloudvms.solinkcloud.com';
 
 if (process.env.REACT_APP_NODE_ENV === 'integration') {
