@@ -245,7 +245,7 @@ export default class extends Component {
 
     this.polling = setInterval(() => {
 
-      CloudAPI.parseToken(token).then(res => {
+      CloudAPI.parseToken(token, true).then(res => {
 
         console.debug(res.event.pushToCloudStatus);
 
