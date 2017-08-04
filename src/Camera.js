@@ -19,7 +19,7 @@ export default class extends Component {
           {
             downloadURL &&
             <div className='download'>
-              <a download='just_a_test.mp4' href={downloadURL}>
+              <a href={downloadURL}>
                 <i className='icon-button white zmdi zmdi-download' />
               </a>
             </div>
@@ -28,9 +28,16 @@ export default class extends Component {
         <img alt='' src={this.props.camera.thumbnail} />
         
         <div className='camera-name flex-center'>
-          
           <Tooltip text={this.props.camera.name} />
         </div>
+        {
+          this.props.singleton &&
+          <div className='singleton-download'>
+            <a href={downloadURL}>
+              <i className='icon-button blue zmdi zmdi-download' />
+            </a>
+          </div>
+        }
       </div>
     )
     

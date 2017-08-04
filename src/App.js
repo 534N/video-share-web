@@ -177,6 +177,7 @@ export default class extends Component {
                           camera={camera}
                           active={idx === this.state.playingIndex && this.state.playingUrl.length > 0}
                           index={idx}
+                          singleton={this.state.event.cameras.length === 1}
                           onCameraChange={this._handleCameraChange.bind(this)} />
                       )
                     })
