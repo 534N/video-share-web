@@ -36,6 +36,7 @@ export default class extends Component {
     const { search } = this.props.location;
     const token = search.split('token=')[1];
 
+
     CloudAPI.parseToken(token).then(res => {
       if (res.err) {
         this.setState({
@@ -234,6 +235,16 @@ export default class extends Component {
                 {this.state.event.details.description}
               </div>
             </div>
+            {
+              this.state.dataReady && this.state.event.type === 'transaction' &&
+              <div className='App-details'>
+                <div className='receipt'>
+                  <pre>
+                    {this.state.event.details.receipt}
+                  </pre>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </div>
