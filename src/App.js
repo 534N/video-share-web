@@ -206,7 +206,16 @@ export default class extends Component {
             </div>
             <div className='App-details'>
               <div className='left'>
-                <div className='title'>{this.state.event.title}</div>
+                <div className='title'>
+                  {
+                    this.state.event.type === 'motion' &&
+                    <span>{`Shared motion clip`}</span>
+                  }
+                  {
+                    this.state.event.type !== 'motion' &&
+                    <span>{this.state.event.title}</span>
+                  }
+                </div>
               </div>
               {
                 this.state.dataReady &&
