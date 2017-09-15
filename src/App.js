@@ -56,7 +56,7 @@ export default class extends Component {
       res.event.cameras.forEach((camera, idx) => {
         url = CloudAPI.getPlaylist(camera) || '';
 
-        if (url.length > 0) {
+        if (url.length > 0 && this.state.playingUrl.length === 0) {
           this.setState({
             playingUrl: url,
           });
