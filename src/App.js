@@ -29,6 +29,7 @@ export default class extends Component {
       playingIndex: 0,
       dataReady: false,
       playingUrl: '',
+      is360: false,
     };
   }
 
@@ -59,6 +60,7 @@ export default class extends Component {
         if (url.length > 0 && this.state.playingUrl.length === 0) {
           this.setState({
             playingUrl: url,
+            is360: /360/.test(camera.name),
           });
         }
       });
@@ -154,7 +156,7 @@ export default class extends Component {
             <div className={inProgressBannerClass}>{this.state.bannerMessage}</div>
             {
               this.state.dataReady &&
-              <Player url={this.state.playingUrl}  />
+              <Player url={this.state.playingUrl} is360={this.state.is360} />
             }
             {
               !this.state.dataReady &&
@@ -300,11 +302,13 @@ export default class extends Component {
   }
 
   _handleCameraChange(index) {
-    const url = CloudAPI.getPlaylist(this.state.event.cameras[index]);
+    const camera = this.state.event.cameras[index];
+    const url = CloudAPI.getPlaylist(camera);
 
     this.setState({
       playingIndex: index,
       playingUrl: url || '',
+      is360: /360/.test(camera.name),
     });
   }
 }
