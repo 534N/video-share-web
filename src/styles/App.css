@@ -309,9 +309,6 @@
     width: 1200px;
     height: 675px; }
   .App .video-wrap {
-    max-height: 675px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 1200px;
     height: 675px; }
   .App .container .App-header .inner-wrap {
@@ -338,9 +335,6 @@
     width: 1000px;
     height: 562.5px; }
   .App .video-wrap {
-    max-height: 562.5px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 1000px;
     height: 562.5px; }
   .App .container .App-header .inner-wrap {
@@ -367,9 +361,6 @@
     width: 800px;
     height: 337.5px; }
   .App .video-wrap {
-    max-height: 450px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 800px;
     height: 450px; }
   .App .container .App-header .inner-wrap {
@@ -396,9 +387,6 @@
     width: 600px;
     height: 337.5px; }
   .App .video-wrap {
-    max-height: 337.5px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 600px;
     height: 337.5px; }
   .App .container .App-header .inner-wrap {
@@ -425,9 +413,6 @@
     width: 600px;
     height: 337.5px; }
   .App .video-wrap {
-    max-height: 337.5px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 600px;
     height: 337.5px; }
   .App .container .App-header .inner-wrap {
@@ -454,9 +439,6 @@
     width: 800px;
     height: 337.5px; }
   .App .video-wrap {
-    max-height: 450px; }
-  .App .video-wrap .player {
-    background: #000;
     width: 800px;
     height: 450px; }
   .App .container .App-header .inner-wrap {
@@ -540,10 +522,8 @@
   .App .container .app-body.single {
     box-shadow: none; }
   .App .container .app-body .video-wrap {
-    max-height: 232px; }
-  .App .container .app-body .video-wrap .player {
     width: 100%;
-    max-height: 232px; }
+    height: 232px; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -656,10 +636,8 @@
   .App .container .app-body.single {
     box-shadow: none; }
   .App .container .app-body .video-wrap {
-    max-height: 211px; }
-  .App .container .app-body .video-wrap .player {
     width: 100%;
-    max-height: 211px; }
+    height: 211px; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -771,10 +749,8 @@
   .App .container .app-body.single {
     box-shadow: none; }
   .App .container .app-body .video-wrap {
-    max-height: 232px; }
-  .App .container .app-body .video-wrap .player {
     width: 100%;
-    max-height: 232px; }
+    height: 232px; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -886,10 +862,8 @@
   .App .container .app-body.single {
     box-shadow: none; }
   .App .container .app-body .video-wrap {
-    max-height: 180px; }
-  .App .container .app-body .video-wrap .player {
     width: 100%;
-    max-height: 180px; }
+    height: 180px; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -1003,10 +977,8 @@
   .App .container .app-body.single {
     box-shadow: none; }
   .App .container .app-body .video-wrap {
-    max-height: 180px; }
-  .App .container .app-body .video-wrap .player {
     width: 100%;
-    max-height: 180px; }
+    height: 180px; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
