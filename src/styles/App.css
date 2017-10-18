@@ -247,7 +247,7 @@
   color: #222;
   text-align: left;
   margin-top: 10px;
-  white-space: pre; }
+  white-space: pre-wrap; }
 
 .App .container .info-container .App-details .receipt pre {
   text-align: left;

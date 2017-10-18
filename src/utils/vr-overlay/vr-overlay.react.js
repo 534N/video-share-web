@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-//import Slider from 'material-ui/Slider';
+import IsMobile from 'ismobilejs';
 
 import ProjectionDome from './projection-dome';
 require('./sass/vr-overlay.sass');
@@ -101,8 +101,8 @@ export default class VROverlay extends PureComponent {
       inverseVPanning: true,
       speedX: 0.1,
       speedY: 0.1,
-      mouseSensitivityX: 0.1,
-      mouseSensitivityY: 0.1,
+      mouseSensitivityX: IsMobile.phone ? 0.5 : 0.1,
+      mouseSensitivityY: IsMobile.phone ? 0.5 : 0.1,
     });
   }
 
