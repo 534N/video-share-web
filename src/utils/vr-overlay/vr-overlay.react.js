@@ -167,6 +167,7 @@ export default class VROverlay extends PureComponent {
 
     this.mouseDown = true;
     this.p.onMouseDown(e.changedTouches[0]);
+    document.getElementsByTagName('body')[0].style.setProperty('overflow', 'hidden');
   }
 
   _handleMouseUp(e) {
@@ -179,6 +180,7 @@ export default class VROverlay extends PureComponent {
     this.mouseDown = false;
 
     this.p.onMouseUp(e.changedTouches[0]);
+    document.getElementsByTagName('body')[0].style.setProperty('overflow', 'auto');
   }
 
   _handleMouseScroll(e) {
