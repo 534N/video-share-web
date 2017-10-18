@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .camera {
   padding: 11px;
   box-sizing: border-box;
@@ -23,7 +24,7 @@
 
 .camera .camera-name {
   font-weight: 100;
-  background: #f5f5f5;
+  background: #f5f5f5ßß;
   padding: 5px 0;
   font-size: 16px;
   transform: translate(0, 16px);

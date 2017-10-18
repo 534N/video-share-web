@@ -524,6 +524,8 @@
   .App .container .app-body .video-wrap {
     width: 100%;
     height: 232px; }
+  .App .container .app-body .video-wrap .control-panel {
+    display: none; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -638,6 +640,8 @@
   .App .container .app-body .video-wrap {
     width: 100%;
     height: 211px; }
+  .App .container .app-body .video-wrap .control-panel {
+    display: none; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -751,6 +755,8 @@
   .App .container .app-body .video-wrap {
     width: 100%;
     height: 232px; }
+  .App .container .app-body .video-wrap .control-panel {
+    display: none; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -864,6 +870,8 @@
   .App .container .app-body .video-wrap {
     width: 100%;
     height: 180px; }
+  .App .container .app-body .video-wrap .control-panel {
+    display: none; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }
@@ -979,6 +987,8 @@
   .App .container .app-body .video-wrap {
     width: 100%;
     height: 180px; }
+  .App .container .app-body .video-wrap .control-panel {
+    display: none; }
   .App .container .info-container {
     transform: translate(0, 0);
     width: 100%; }

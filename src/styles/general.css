@@ -7,9 +7,12 @@
   cursor: pointer;
   opacity: 0.9;
   font-size: 1.1em; }
-  .icon-button:hover {
-    opacity: 1; }
-  .icon-button.blue {
-    color: #0088cc; }
-  .icon-button.white {
-    color: #fff; }
+
+.icon-button:hover {
+  opacity: 1; }
+
+.icon-button.blue {
+  color: #0088cc; }
+
+.icon-button.white {
+  color: #fff; }

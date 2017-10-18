@@ -7,6 +7,9 @@ import Camera from './Camera.js';
 import moment from 'moment';
 import Cookie from 'js-cookie';
 import classNames from 'classnames';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 export default class extends Component {
 

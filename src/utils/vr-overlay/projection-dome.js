@@ -196,11 +196,20 @@ ProjectionDome.prototype = {
 
             x = event.pageX - this._dragStart.x;
             y = event.pageY - this._dragStart.y;
+            console.debug('x', x)
+            console.debug('y', y)
             this._dragStart.x = event.pageX;
             this._dragStart.y = event.pageY;
 
             this._target_lon = this._target_lon + this._mouseSensitivityX * signX * x;  
             this._target_lat = this._target_lat + this._mouseSensitivityY * signY * y;
+
+            console.debug('event', event)
+            console.debug('this._dragStart.x', this._dragStart.x)
+            console.debug('this._dragStart.y', this._dragStart.y)
+            console.debug('this._target_lon', this._target_lon)
+            console.debug('this._target_lat', this._target_lat)
+            
         }
     },
 

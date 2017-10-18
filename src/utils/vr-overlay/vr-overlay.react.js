@@ -68,6 +68,9 @@ export default class VROverlay extends PureComponent {
         onMouseDown={this._handleMouseDown.bind(this)}
         onMouseUp={this._handleMouseUp.bind(this)}
         onMouseMove={this._handleMouseMove.bind(this)}
+        onTouchStart={this._handleTouchStart.bind(this)}
+        onTouchEnd={this._handleTouchEnd.bind(this)}
+        onTouchMove={this._handleTouchMove.bind(this)}
         onClick={this._handleMouseClick.bind(this)} >
         <div className='control-panel'>
           <div className='top'>
@@ -147,14 +150,35 @@ export default class VROverlay extends PureComponent {
     }
 
     this.mouseDown = true;
-
     this.p.onMouseDown(e);
+  }
+
+  _handleTouchStart(e) {
+    let isRightMB = false;
+    if ('which' in e) { // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
+      isRightMB = e.which === 3;
+    } else if ('button' in e) { // IE, Opera 
+      isRightMB = e.button === 2;
+    }
+
+    if (isRightMB) {
+      return;
+    }
+
+    this.mouseDown = true;
+    this.p.onMouseDown(e.changedTouches[0]);
   }
 
   _handleMouseUp(e) {
     this.mouseDown = false;
 
     this.p.onMouseUp(e);
+  }
+
+  _handleTouchEnd(e) {
+    this.mouseDown = false;
+
+    this.p.onMouseUp(e.changedTouches[0]);
   }
 
   _handleMouseScroll(e) {
@@ -172,6 +196,15 @@ export default class VROverlay extends PureComponent {
 
     this.mouseMoveFired = true;
     this.p.onMouseMove(e);
+  }
+
+  _handleTouchMove(e) {
+    if (!this.mouseDown) {
+      return;
+    }
+
+    this.mouseMoveFired = true;
+    this.p.onMouseMove(e.changedTouches[0]);
   }
 
   _moveVR(direction) {
