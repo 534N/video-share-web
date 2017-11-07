@@ -14,6 +14,12 @@ export default class VROverlay extends PureComponent {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.splits !== nextProps.splits) {
+      this.resizeProjectDome();
+    }
+  }
+
   componentDidMount() {
     let passiveSupported = false;
 
@@ -44,7 +50,7 @@ export default class VROverlay extends PureComponent {
 
   render() {
     return (
-      <div className='vr-overlay'>
+      <div className='vr-overlay' style={this.props.style}>
         <div ref='canvasContainer' className='vr-canvas-container' />
         { this.renderControls() }
       </div>
@@ -72,30 +78,45 @@ export default class VROverlay extends PureComponent {
         onTouchEnd={this._handleTouchEnd.bind(this)}
         onTouchMove={this._handleTouchMove.bind(this)}
         onClick={this._handleMouseClick.bind(this)} >
-        <div className='control-panel'>
-          <div className='top'>
-            <i className='zmdi zmdi-keyboard_arrow_up' onClick={this._moveVR.bind(this, 'up')} />
+        {
+          this.props.split === 1 &&
+          <div className='control-panel'>
+            <div className='top'>
+              <i className='zmdi zmdi-keyboard_arrow_up' onClick={this._moveVR.bind(this, 'up')} />
+            </div>
+            <div className='middle'>
+              <i className='zmdi zmdi-chevron-left' onClick={this._moveVR.bind(this, 'left')} />
+              <i className='zmdi zmdi-chevron-right' onClick={this._moveVR.bind(this, 'right')} />
+            </div>
+            <div className='bottom'>
+              <i className='zmdi zmdi-keyboard_arrow_down' onClick={this._moveVR.bind(this, 'down')} />
+            </div>
           </div>
-          <div className='middle'>
-            <i className='zmdi zmdi-chevron-left' onClick={this._moveVR.bind(this, 'left')} />
-            <i className='zmdi zmdi-chevron-right' onClick={this._moveVR.bind(this, 'right')} />
+        }
+        {
+          this.props.split === 1 &&
+          <div className='zoom-panel'>
+            <div style={styles.root}>
+              {/* <Slider style={{height: 100}} axis="y" defaultValue={this.state.vrZoom} value={this.state.vrZoom} onChange={this._handleSliderChange.bind(this)} /> */}
+            </div>
           </div>
-          <div className='bottom'>
-            <i className='zmdi zmdi-keyboard_arrow_down' onClick={this._moveVR.bind(this, 'down')} />
-          </div>
-        </div>
-        <div className='zoom-panel'>
-          <div style={styles.root}>
-            {/* <Slider style={{height: 100}} axis="y" defaultValue={this.state.vrZoom} value={this.state.vrZoom} onChange={this._handleSliderChange.bind(this)} /> */}
-          </div>
-        </div>
+        }
       </div>
     );
   }
 
-  videoElementReady(videoElement) {
-    const h = this.refs.canvasContainer.offsetHeight;
+  destroy() {
+    if (this.p) {
+      this.p.destroy();
 
+    }
+  }
+
+  videoElementReady(videoElement) {
+    const h = this._determineHeight();
+
+    console.debug(h)
+    
     this.p = new ProjectionDome( this.refs.canvasContainer, h * 16 / 9, h, videoElement, {
       inverseHPanning: true,
       inverseVPanning: true,
@@ -107,8 +128,13 @@ export default class VROverlay extends PureComponent {
   }
 
   resizeProjectDome() {
-    const newHeight = this.refs.canvasContainer.offsetHeight;
+    const newHeight = this._determineHeight();
+
     this.p.resize(newHeight * 16 / 9, newHeight)
+  }
+
+  _determineHeight() {
+    return this.props.splits < 2 ? this.refs.canvasContainer.offsetHeight : this.refs.canvasContainer.offsetHeight / 2;
   }
 
   _handleSliderChange(e, value) {

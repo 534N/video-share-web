@@ -1,12 +1,40 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Component } from 'react';
 import Hls from 'connect-hls.js';
 import VROverlay from './utils/vr-overlay/vr-overlay.react.js';
+import classNames from 'classnames';
+
 import './styles/Player.css';
 import './utils/vr-overlay/sass/vr-overlay.css';
 
-export default class extends PureComponent {
+export default class extends Component {
   componentDidMount() {
     this._initHLS(this.props.url);
+    this.totalSplits = 4;
+
+    this.splitStyles = {
+      'split-1': [
+        {},
+      ],
+      'split-2': [
+        { top: 0, left: 0, width: '50%' },
+        { top: 0, left: '50%', width: '50%' },
+      ],
+      'split-3': [
+        { top: 0, left: 0, width: '50%', height: '50%' },
+        { top: 0, left: '50%', width: '50%', height: '50%' },
+        { top: '50%', left: 0, width: '50%', height: '50%' },
+      ],
+      'split-4': [
+        { top: 0, left: 0, width: '50%', height: '50%' },
+        { top: 0, left: '50%', width: '50%', height: '50%' },
+        { top: '50%', left: 0, width: '50%', height: '50%' },
+        { top: '50%', left: '50%', width: '50%', height: '50%' },
+      ],
+    };
+    
+    this.state = {
+      splits: 1
+    };
 
     if (this.props.is360) {
       this._init360();
@@ -19,13 +47,30 @@ export default class extends PureComponent {
     }
 
     if (this.props.is360) {
+      // if (this.state.splits !== prevState.splits) {
+        this._destroy360();
+
+        debugger
+      // }
       this._init360();
+      
     }
   }
 
   render() {
     return (
       <div className='video-wrap'>
+        <div className='overlay'>
+          {
+            this.props.is360 &&
+            <div className='vr-banner'>
+              <i className='zmdi zmdi-360vr' />
+              {
+                this._renderSplits()
+              }
+            </div>
+          }
+        </div>
         <video
           className='player'
           ref='player'
@@ -37,13 +82,60 @@ export default class extends PureComponent {
     )
   }
 
+  _renderSplits() {
+    let splitToggles = [];
+    for(let i=1; i<=this.totalSplits; i++) {
+      const splitClass = classNames(
+        'split',
+        {
+          active: i <= this.state.split,
+        }
+      );
+
+      splitToggles.push(
+        <div className={splitClass} key={`split-toggle-${i}`} onClick={this._toggleSplit.bind(this, i > this.state.split)}>
+          <i className={`zmdi zmdi-filter_${i}`} />
+        </div>
+      );
+    }
+
+    return splitToggles;
+  }
+
   _render360() {
     return (
-      <VROverlay 
-        ref='vrOverlay'
-        togglePausePlay={this.props.togglePausePlay}
-      />
+      <div>
+        { this._renderVROverlay() }
+      </div>
     );
+  }
+
+  _renderVROverlay() {
+    let splits = [];
+    
+    for(let i=1; i<=this.state.splits; i++) {
+
+      const styleIndex = i - 1;
+      const style = this.splitStyles[`split-${this.state.splits}`][styleIndex];
+
+      splits.push(
+        <VROverlay
+          ref={`vrOverlay-${i}`}
+          key={`vrOverlay-${i}`}
+          style={style}
+          splits={this.state.splits}
+          togglePausePlay={this.props.togglePausePlay} />
+      )
+    }
+
+    console.debug(splits)
+    return splits;
+  }
+
+  _toggleSplit(status) {
+    this.setState({
+      splits: this.state.splits + 1,
+    });
   }
 
   _initHLS(url) {
@@ -63,13 +155,30 @@ export default class extends PureComponent {
       this.hls = new Hls(config);
       this.hls.loadSource(url);
       this.hls.attachMedia(video);
-      this.hls.on(Hls.Events.MANIFEST_PARSED,function() {
-        video.play();
+      this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        const playPromise = video.play();
+
+        if (playPromise !== undefined) {
+          playPromise.then(_ => {
+            // 
+          })
+          .catch(error => {
+            console.debug('playPromise err', error)
+          });
+        }
       });
     } 
   }
 
+  _destroy360() {
+    for (let i = 1; i <= this.state.splits; i++) {
+      this.refs[`vrOverlay-${i}`].destroy();
+    }
+  }
+
   _init360() {
-    this.refs.vrOverlay.videoElementReady(this.refs.player);
+    for(let i=1; i<=this.state.splits; i++) {
+      this.refs[`vrOverlay-${i}`].videoElementReady(this.refs.player);
+    }
   }
 }
