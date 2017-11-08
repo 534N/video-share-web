@@ -1,4 +1,7 @@
+@import ../mixins/_flexbox
 @import ../mixins/_transitions
+
+$banner-height: 44px
 
 .camera
   padding: 11px
@@ -53,6 +56,54 @@
     top: 11px
     left: 11px
 
+    .vr-banner
+      width: 100%
+      background: rgba(0, 0, 0, 0.5)
+
+      +flexbox
+      +justify-content(center)
+      +align-items(center)
+
+      position: absolute
+      color: #fff
+      top: 0
+      left: 0
+      .zmdi
+        color: #fff
+
+      .zmdi-360vr
+        color: #fff
+        font-size: 3em
+        margin: 0 10px
+
+      .split
+        +flexbox
+        +justify-content(center)
+        +align-items(center)
+
+        cursor: pointer
+        width: $banner-height
+        height: $banner-height
+
+        &.active
+          background: #0088cc
+
+          .zmdi
+            transform: scale(1.1)
+            text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6)
+            opacity: 1
+            transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms
+
+
+        &:hover:not(.active)
+          background: rgba(0, 136, 204, 0.6)
+          opacity: 1
+
+        .zmdi
+          font-size: 1.5em
+          opacity: 0.7
+          transform: scale(0.9)
+          transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms
     .banner
       padding: 5px
       background: #0088cc

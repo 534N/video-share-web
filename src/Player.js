@@ -1,4 +1,4 @@
-import React, { PureComponent, Component } from 'react';
+import React, { PureComponent } from 'react';
 import Hls from 'connect-hls.js';
 import VROverlay from './utils/vr-overlay/vr-overlay.react.js';
 import classNames from 'classnames';
@@ -6,9 +6,9 @@ import classNames from 'classnames';
 import './styles/Player.css';
 import './utils/vr-overlay/sass/vr-overlay.css';
 
-export default class extends Component {
-  componentDidMount() {
-    this._initHLS(this.props.url);
+export default class extends PureComponent {
+  constructor(props) {
+    super(props);
     this.totalSplits = 4;
 
     this.splitStyles = {
@@ -31,11 +31,39 @@ export default class extends Component {
         { top: '50%', left: '50%', width: '50%', height: '50%' },
       ],
     };
-    
-    this.state = {
-      splits: 1
+
+    this.initPositions =  {
+      'split-1': [
+        { lon: -180, lat: 30 },
+      ],
+      'split-2': [
+        { lon: -180, lat: 30 },
+        { lon: 1, lat: 30 },
+      ],
+      'split-3': [
+        { lon: -180, lat: 30 },
+        { lon: -60, lat: 30 },
+        { lon: 60, lat: 30 },
+      ],
+      'split-4': [
+        { lon: -180, lat: 30 },
+        { lon: -90, lat: 30 },
+        { lon: 1, lat: 30 },
+        { lon: 90, lat: 30 },
+      ],
     };
 
+    const initSplit = 1;
+    this.state = {
+      splits: initSplit,
+      style: this.splitStyles[this._getSplitName(initSplit)],
+      position: JSON.parse(localStorage.getItem(this._getLocalStorageKey(initSplit))) || this.initPositions[this._getSplitName(initSplit)],
+    };
+  }
+
+  componentDidMount() {
+    this._initHLS(this.props.url);
+    
     if (this.props.is360) {
       this._init360();
     }
@@ -47,30 +75,30 @@ export default class extends Component {
     }
 
     if (this.props.is360) {
-      // if (this.state.splits !== prevState.splits) {
-        this._destroy360();
-
-        debugger
-      // }
+      this._destroy360();
       this._init360();
-      
     }
   }
 
   render() {
     return (
       <div className='video-wrap'>
-        <div className='overlay'>
-          {
-            this.props.is360 &&
+        {
+          this.props.is360 &&
+          <div className='overlay'>
             <div className='vr-banner'>
               <i className='zmdi zmdi-360vr' />
               {
                 this._renderSplits()
               }
             </div>
-          }
-        </div>
+          </div>
+        }
+        {
+          this.props.is360 &&
+          <div className='mask' />
+        }
+        
         <video
           className='player'
           ref='player'
@@ -88,12 +116,12 @@ export default class extends Component {
       const splitClass = classNames(
         'split',
         {
-          active: i <= this.state.split,
+          active: i === this.state.splits,
         }
       );
 
       splitToggles.push(
-        <div className={splitClass} key={`split-toggle-${i}`} onClick={this._toggleSplit.bind(this, i > this.state.split)}>
+        <div className={splitClass} key={`split-toggle-${i}`} onClick={this._toggleSplit.bind(this, i)}>
           <i className={`zmdi zmdi-filter_${i}`} />
         </div>
       );
@@ -112,29 +140,46 @@ export default class extends Component {
 
   _renderVROverlay() {
     let splits = [];
-    
+
     for(let i=1; i<=this.state.splits; i++) {
 
-      const styleIndex = i - 1;
-      const style = this.splitStyles[`split-${this.state.splits}`][styleIndex];
+      const splitIndex = this._getSplitIndex(i);
+      const style = this.state.style[splitIndex];
+      const position = this.state.position[splitIndex];
 
       splits.push(
         <VROverlay
           ref={`vrOverlay-${i}`}
           key={`vrOverlay-${i}`}
           style={style}
+          position={position}
           splits={this.state.splits}
+          splitIndex={splitIndex}
+          onPositionUpdate={this._updatePositions.bind(this)}
           togglePausePlay={this.props.togglePausePlay} />
       )
     }
 
-    console.debug(splits)
     return splits;
   }
 
-  _toggleSplit(status) {
+  _updatePositions(splitIndex, newPos) {
+    const position = this.state.position;
+
+    position[splitIndex] = newPos;
+
+    localStorage.setItem(this._getLocalStorageKey(this.state.splits), JSON.stringify(position));
+
     this.setState({
-      splits: this.state.splits + 1,
+      position: position,
+    });
+  }
+
+  _toggleSplit(newSplit) {
+    this.setState({
+      splits: newSplit,
+      style: this.splitStyles[this._getSplitName(newSplit)],
+      position: JSON.parse(localStorage.getItem(this._getLocalStorageKey(newSplit))) || this.initPositions[this._getSplitName(newSplit)],
     });
   }
 
@@ -180,5 +225,17 @@ export default class extends Component {
     for(let i=1; i<=this.state.splits; i++) {
       this.refs[`vrOverlay-${i}`].videoElementReady(this.refs.player);
     }
+  }
+
+  _getSplitIndex(split) {
+    return split - 1;
+  }
+
+  _getLocalStorageKey(split) {
+    return `SPLIT_POS_${split}`;
+  }
+
+  _getSplitName(split) {
+    return `split-${split}`;
   }
 }

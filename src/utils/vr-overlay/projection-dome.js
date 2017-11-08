@@ -5,10 +5,6 @@ try {
 }
 
 function ProjectionDome( parentEl, w, h, videoEl, options ) {
-
-    console.debug('w', w)
-    console.debug('h', h)
-    console.debug('videoEl', videoEl)
     this._video = videoEl;
 
     this.options = options || {};
@@ -67,8 +63,8 @@ ProjectionDome.prototype = {
         this._mouseDown = false;
         this._dragStart = {};
 
-        this._lat = ProjectionDome.defaults.lat;
-        this._lon = ProjectionDome.defaults.lon;
+        this._lat = this.options.lat || ProjectionDome.defaults.lat;
+        this._lon = this.options.lon || ProjectionDome.defaults.lon;
         this._fov = ProjectionDome.defaults.fov;
         this.zoom = this._cam_z.max;
 
@@ -190,7 +186,7 @@ ProjectionDome.prototype = {
         createAnimation();
     },
 
-    onMouseMove: function(event) {
+    onMouseMove: function(event, cb) {
         if(this._mouseDown) {
             var signX = this._inverseHPanning ? 1 : -1,
             signY = this._inverseVPanning ? 1 : -1;
@@ -204,6 +200,8 @@ ProjectionDome.prototype = {
 
             this._target_lon = this._target_lon + this._mouseSensitivityX * signX * x;  
             this._target_lat = this._target_lat + this._mouseSensitivityY * signY * y;
+
+            cb(this._target_lon, this._target_lat);
         }
     },
 

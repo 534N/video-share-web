@@ -8,9 +8,12 @@ export default class VROverlay extends PureComponent {
 
   constructor(props) {
     super(props);
-
+    this.showLonLat = true;
+    
     this.state = {
       vrZoom: 0,
+      lon: props.position.lon,
+      lat: props.position.lat,
     };
   }
 
@@ -18,6 +21,11 @@ export default class VROverlay extends PureComponent {
     if (this.props.splits !== nextProps.splits) {
       this.resizeProjectDome();
     }
+
+    this.setState({
+      lon: nextProps.position.lon,
+      lat: nextProps.position.lat,
+    })
   }
 
   componentDidMount() {
@@ -79,6 +87,12 @@ export default class VROverlay extends PureComponent {
         onTouchMove={this._handleTouchMove.bind(this)}
         onClick={this._handleMouseClick.bind(this)} >
         {
+          this.showLonLat &&
+          <div className='debug'>
+            <div>{`lon: ${this.state.lon.toFixed(2)}, lat: ${this.state.lat.toFixed(2)}`}</div>
+          </div>
+        }
+        {
           this.props.split === 1 &&
           <div className='control-panel'>
             <div className='top'>
@@ -108,23 +122,24 @@ export default class VROverlay extends PureComponent {
   destroy() {
     if (this.p) {
       this.p.destroy();
-
     }
   }
 
   videoElementReady(videoElement) {
     const h = this._determineHeight();
 
-    console.debug(h)
-    
     this.p = new ProjectionDome( this.refs.canvasContainer, h * 16 / 9, h, videoElement, {
       inverseHPanning: true,
       inverseVPanning: true,
       speedX: 0.1,
       speedY: 0.1,
+      lon: this.props.position.lon,
+      lat: this.props.position.lat,
       mouseSensitivityX: IsMobile.phone ? 0.5 : 0.1,
       mouseSensitivityY: IsMobile.phone ? 0.5 : 0.1,
     });
+
+    this.p.onloadeddata();
   }
 
   resizeProjectDome() {
@@ -134,7 +149,11 @@ export default class VROverlay extends PureComponent {
   }
 
   _determineHeight() {
-    return this.props.splits < 2 ? this.refs.canvasContainer.offsetHeight : this.refs.canvasContainer.offsetHeight / 2;
+    if (!this.refs.canvasContainer) {
+      return;
+    }
+
+    return this.props.splits === 2 ? this.refs.canvasContainer.offsetHeight / 2 : this.refs.canvasContainer.offsetHeight;
   }
 
   _handleSliderChange(e, value) {
@@ -200,6 +219,8 @@ export default class VROverlay extends PureComponent {
     this.mouseDown = false;
 
     this.p.onMouseUp(e);
+    this.props.onPositionUpdate(this.props.splitIndex, { lon: this.state.lon, lat: this.state.lat });
+    
   }
 
   _handleTouchEnd(e) {
@@ -223,7 +244,9 @@ export default class VROverlay extends PureComponent {
     }
 
     this.mouseMoveFired = true;
-    this.p.onMouseMove(e);
+    this.p.onMouseMove(e, (newLon, newLat) => {
+      this.setState({ lon: newLon, lat: newLat });
+    });
   }
 
   _handleTouchMove(e) {
