@@ -5,7 +5,6 @@ try {
 }
 
 function ProjectionDome( parentEl, w, h, videoEl, options ) {
-
     this._video = videoEl;
 
     this.options = options || {};
@@ -64,8 +63,8 @@ ProjectionDome.prototype = {
         this._mouseDown = false;
         this._dragStart = {};
 
-        this._lat = ProjectionDome.defaults.lat;
-        this._lon = ProjectionDome.defaults.lon;
+        this._lat = this.options.lat || ProjectionDome.defaults.lat;
+        this._lon = this.options.lon || ProjectionDome.defaults.lon;
         this._fov = ProjectionDome.defaults.fov;
         this.zoom = this._cam_z.max;
 
@@ -119,7 +118,7 @@ ProjectionDome.prototype = {
 
         // append the rendering element to this div
         parentEl.appendChild(this._renderer.domElement);
-
+        
         var createAnimation = function () {
             self._texture.generateMipmaps = false;
             self._texture.minFilter = THREE.LinearFilter;
@@ -144,8 +143,7 @@ ProjectionDome.prototype = {
                 }
             }
 
-            self._video.onloadeddata = function(d) {
-
+            self.onloadeddata = function(d) {
                 self._ratio = self._video.videoHeight / self._video.videoWidth;
 
                 self._uniforms = {
@@ -181,13 +179,14 @@ ProjectionDome.prototype = {
                 self.animate();
             };
 
+            self._video.addEventListener('loadeddata', self.onloadeddata);
         };
 
         this._texture = new THREE.Texture( this._video );
         createAnimation();
     },
 
-    onMouseMove: function(event) {
+    onMouseMove: function(event, cb) {
         if(this._mouseDown) {
             var signX = this._inverseHPanning ? 1 : -1,
             signY = this._inverseVPanning ? 1 : -1;
@@ -201,6 +200,8 @@ ProjectionDome.prototype = {
 
             this._target_lon = this._target_lon + this._mouseSensitivityX * signX * x;  
             this._target_lat = this._target_lat + this._mouseSensitivityY * signY * y;
+
+            cb(this._target_lon, this._target_lat);
         }
     },
 
@@ -468,7 +469,7 @@ ProjectionDome.prototype = {
         this._texture.dispose();
         this._scene.remove(this._mesh);
         this._renderer.domElement.remove();
-        this._video.onloadeddata = function(){};
+        this._video.removeEventListener('loadeddata', this.onloadeddata);
 
         if (cb) {
            cb();

@@ -50,6 +50,77 @@
   top: 11px;
   left: 11px; }
 
+.camera .overlay .vr-banner {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  position: absolute;
+  color: #fff;
+  top: 0;
+  left: 0; }
+
+.camera .overlay .vr-banner .zmdi {
+  color: #fff; }
+
+.camera .overlay .vr-banner .zmdi-360vr {
+  color: #fff;
+  font-size: 3em;
+  margin: 0 10px; }
+
+.camera .overlay .vr-banner .split {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  cursor: pointer;
+  width: 44px;
+  height: 44px; }
+
+.camera .overlay .vr-banner .split.active {
+  background: #0088cc; }
+
+.camera .overlay .vr-banner .split.active .zmdi {
+  transform: scale(1.1);
+  text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.6);
+  opacity: 1;
+  transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
+
+.camera .overlay .vr-banner .split:hover:not(.active) {
+  background: rgba(0, 136, 204, 0.6);
+  opacity: 1; }
+
+.camera .overlay .vr-banner .split .zmdi {
+  font-size: 1.5em;
+  opacity: 0.7;
+  transform: scale(0.9);
+  transition: transform 1s cubic-bezier(0.23, 1, 0.32, 1) 0ms; }
+
 .camera .overlay .banner {
   padding: 5px;
   background: #0088cc;
