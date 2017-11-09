@@ -113,6 +113,10 @@ export default class extends PureComponent {
   _renderSplits() {
     let splitToggles = [];
     for(let i=1; i<=this.totalSplits; i++) {
+      if (i === 3) {
+        continue;
+      }
+
       const splitClass = classNames(
         'split',
         {
@@ -120,9 +124,18 @@ export default class extends PureComponent {
         }
       );
 
+      const iconClass = classNames(
+        'zmdi',
+        {
+          'zmdi-filter_none': i === 1,
+          'zmdi-flip': i === 2,
+          'zmdi-border_inner': i === 4,
+        }
+      );
+
       splitToggles.push(
         <div className={splitClass} key={`split-toggle-${i}`} onClick={this._toggleSplit.bind(this, i)}>
-          <i className={`zmdi zmdi-filter_${i}`} />
+          <i className={iconClass} />
         </div>
       );
     }

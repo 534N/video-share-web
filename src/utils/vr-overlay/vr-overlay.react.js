@@ -8,7 +8,7 @@ export default class VROverlay extends PureComponent {
 
   constructor(props) {
     super(props);
-    this.showLonLat = true;
+    this.showLonLat = false;
     
     this.state = {
       vrZoom: 0,
