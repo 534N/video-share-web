@@ -2,18 +2,16 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden; }
-
-.tooltip-container .tooltip {
-  position: absolute;
-  background: #fff;
-  color: #333;
-  padding: 5px;
-  white-space: nowrap;
-  top: 35px;
-  left: 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  opacity: 0; }
-
-.tooltip-container .tooltip.active {
-  opacity: 1; }
+  .tooltip-container .tooltip {
+    position: absolute;
+    background: #fff;
+    color: #333;
+    padding: 5px;
+    white-space: nowrap;
+    top: 35px;
+    left: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    opacity: 0; }
+    .tooltip-container .tooltip.active {
+      opacity: 1; }
