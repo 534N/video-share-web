@@ -93,7 +93,7 @@ export default class VROverlay extends PureComponent {
           </div>
         }
         {
-          this.props.split === 1 &&
+          this.props.splits === 1 &&
           <div className='control-panel'>
             <div className='top'>
               <i className='zmdi zmdi-keyboard_arrow_up' onClick={this._moveVR.bind(this, 'up')} />
@@ -108,7 +108,7 @@ export default class VROverlay extends PureComponent {
           </div>
         }
         {
-          this.props.split === 1 &&
+          this.props.splits === 1 &&
           <div className='zoom-panel'>
             <div style={styles.root}>
               {/* <Slider style={{height: 100}} axis="y" defaultValue={this.state.vrZoom} value={this.state.vrZoom} onChange={this._handleSliderChange.bind(this)} /> */}
