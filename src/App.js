@@ -62,6 +62,7 @@ export default class extends Component {
 
         if (url.length > 0 && this.state.playingUrl.length === 0) {
           this.setState({
+            downloadURL: this._getDownloadLink(camera),
             playingUrl: url,
             is360: /360/.test(camera.name),
           });
@@ -159,7 +160,7 @@ export default class extends Component {
             <div className={inProgressBannerClass}>{this.state.bannerMessage}</div>
             {
               this.state.dataReady &&
-              <Player url={this.state.playingUrl} is360={this.state.is360} />
+              <Player url={this.state.playingUrl} is360={this.state.is360} downloadURL={this.state.downloadURL}/>
             }
             {
               !this.state.dataReady &&
@@ -304,11 +305,26 @@ export default class extends Component {
     });
   }
 
+  _getDownloadLink(camera) {
+    let url;
+    
+    if (camera && camera.streams) {
+      camera.streams.forEach(stream => {
+        if (stream.playlist) {
+          url = stream.download;
+        }
+      });
+    }
+
+    return url;
+  }
+
   _handleCameraChange(index) {
     const camera = this.state.event.cameras[index];
     const url = CloudAPI.getPlaylist(camera);
 
     this.setState({
+      downloadURL: this._getDownloadLink(camera),
       playingIndex: index,
       playingUrl: url || '',
       is360: /360/.test(camera.name),

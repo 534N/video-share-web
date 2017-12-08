@@ -24,18 +24,33 @@ export default class extends PureComponent {
           <div className='progress' ref='progress' />
         </div>
         <div style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}>
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+          }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}>
+            {
+              this.state.playing &&
+              <div className='control zmdi zmdi-pause' onClick={this._pause.bind(this)}/>
+            }
+            {
+              !this.state.playing &&
+              <div className='control zmdi zmdi-play' onClick={this._play.bind(this)}/>
+            }
+            <div className='timestamp'>{this.state.currentTimeFormatted} / {this.state.durationTimeFormatted}</div>
+          </div>
           {
-            this.state.playing &&
-            <div className='control zmdi zmdi-pause' onClick={this._pause.bind(this)}/>
+            !this.props.is360 && this.props.downloadURL &&
+            <div className='download'>
+              <a href={this.props.downloadURL}>
+                <i className='icon-button white zmdi zmdi-download' style={{fontSize: '22px'}}/>
+              </a>
+            </div>
           }
-          {
-            !this.state.playing &&
-            <div className='control zmdi zmdi-play' onClick={this._play.bind(this)}/>
-          }
-          <div className='timestamp'>{this.state.currentTimeFormatted} / {this.state.durationTimeFormatted}</div>
         </div>
       </div>
     );

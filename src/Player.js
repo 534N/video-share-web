@@ -108,7 +108,7 @@ export default class extends PureComponent {
           <div className='mask' />
         }
 
-        <VideoControl ref='videoControl' />
+        <VideoControl ref='videoControl' is360={this.props.is360} downloadURL={this.props.downloadURL}/>
         
         <video
           className='player'
