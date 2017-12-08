@@ -115,7 +115,7 @@ export default class extends PureComponent {
           ref='player'
           src={this.props.url}
           autoPlay={true}
-          controls={true}
+          controls={false}
           playsInline />
         { this.props.is360 && this._render360() }
       </div>
