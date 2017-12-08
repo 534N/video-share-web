@@ -9,7 +9,8 @@ export default class extends PureComponent {
     super(props);
 
     this.state = {
-      playing: false,
+      /* !! Important to use undefined here */
+      playing: undefined,
     }
 
     this.videoElement = {};
@@ -18,7 +19,6 @@ export default class extends PureComponent {
   render() {
 
     return (
-
       <div className='video-control'>
         <div className='control progress-bar' onClick={this._handleProgressBarClick.bind(this)}>
           <div className='progress' ref='progress' />
@@ -77,7 +77,7 @@ export default class extends PureComponent {
       this.refs.progress.setAttribute('style', `transform: translate(calc(-100% + ${pos * this.refs.progress.offsetWidth}px), 0)`)
     }
 
-    if (!this.state.playing) {
+    if (this.state.playing === undefined) {
       this.setState({
         playing: true,
       });
