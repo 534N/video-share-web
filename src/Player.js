@@ -47,9 +47,9 @@ export default class extends PureComponent {
       ],
       'split-4': [
         { lon: -180, lat: 30 },
+        { lon: 90, lat: 30 },
         { lon: -90, lat: 30 },
         { lon: 1, lat: 30 },
-        { lon: 90, lat: 30 },
       ],
     };
 
