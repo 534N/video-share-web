@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Hls from 'connect-hls.js';
 import VROverlay from './utils/vr-overlay/vr-overlay.react.js';
+import VideoControl from './VideoControl.js';
 import classNames from 'classnames';
 
 import './styles/Player.css';
@@ -62,11 +63,19 @@ export default class extends PureComponent {
   }
 
   componentDidMount() {
-    this._initHLS(this.props.url);
     
     if (this.props.is360) {
       this._init360();
     }
+
+    const videoElement = this.refs.player;
+
+    for (let [k, v] of Object.entries(this._eventListeners())) {
+      if (v) {videoElement.addEventListener(k, v);}
+    }
+
+    this._initHLS(this.props.url);
+
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -98,6 +107,8 @@ export default class extends PureComponent {
           this.props.is360 &&
           <div className='mask' />
         }
+
+        <VideoControl ref='videoControl' />
         
         <video
           className='player'
@@ -217,9 +228,11 @@ export default class extends PureComponent {
       this.hls.on(Hls.Events.MANIFEST_PARSED, () => {
         const playPromise = video.play();
 
+
         if (playPromise !== undefined) {
           playPromise.then(_ => {
             // 
+            this._handlePlayerLoad();
           })
           .catch(error => {
             console.debug('playPromise err', error)
@@ -227,6 +240,17 @@ export default class extends PureComponent {
         }
       });
     } 
+  }
+
+  _handleTimeUpdate(d) {
+    this.refs.videoControl.handleTimeUpdate(d);
+  }
+
+  _handlePlayerLoad(e) {
+    const videoElement = this.refs.player;
+    
+    videoElement.addEventListener('timeupdate', this._handleTimeUpdate.bind(this));
+    this.refs.videoControl.updateVideoElement(videoElement);    
   }
 
   _destroy360() {
@@ -251,5 +275,22 @@ export default class extends PureComponent {
 
   _getSplitName(split) {
     return `split-${split}`;
+  }
+
+  _eventListeners() {
+    return {
+      loadeddata: this.props.onLoadedData,
+      canplay: this.props.onCanPlay,
+      canplaythrough: this.props.onCanPlayThrough,
+      playing: this.props.onPlaying,
+      waiting: this.props.onWaiting,
+      seeking: this.props.onSeeking,
+      seeked: this.props.onSeeked,
+      ended: this.props.onEnded,
+      durationchange: this.props.onDurationChange,
+      play: this.props.onPlay,
+      pause: this.props.onPause,
+      ratechange: this.props.onRateChange,
+    };
   }
 }

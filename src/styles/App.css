@@ -4,6 +4,9 @@
   100% {
     opacity: 1; } }
 
+div {
+  box-sizing: border-box; }
+
 .debug {
   position: absolute;
   color: #fff;
