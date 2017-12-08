@@ -41,7 +41,10 @@ export default class extends PureComponent {
               !this.state.playing &&
               <div className='control zmdi zmdi-play' onClick={this._play.bind(this)}/>
             }
-            <div className='timestamp'>{this.state.currentTimeFormatted} / {this.state.durationTimeFormatted}</div>
+            {
+              this.state.currentTimeFormatted && this.state.durationTimeFormatted &&
+              <div className='timestamp'>{this.state.currentTimeFormatted} / {this.state.durationTimeFormatted}</div>
+            }
           </div>
           {
             !this.props.is360 && this.props.downloadURL &&
